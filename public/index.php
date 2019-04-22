@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Laravel - A PHP Framework For Web Artisans
+ * Gestolab - Un gestor documental para laboratorios dentales
  *
- * @package  Laravel
- * @author   Taylor Otwell <taylor@laravel.com>
+ * @package  Gestolab
+ * @author   Oscar Beses <oscar.beses@gmail.com>
  */
 
 define('LARAVEL_START', microtime(true));
