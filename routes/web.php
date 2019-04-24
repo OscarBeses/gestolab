@@ -36,5 +36,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Ruta de home que aparece cuando se hace login
+Route::get('/home', 'HomeController@index');
+// Ruta clientes y clientes/cli_id
+Route::get('/clientes', 'Clientes\ClientesController@indexClientes')->name('clientes');
+Route::get('/clientes/{cliente}', 'Clientes\ClientesController@indexClienteDetalle')->name('cliente');
+// Ruta para productos y productos/prod_id
+Route::get('/productos', 'Productos\ProductosController@indexProductos')->name('productos');
+Route::get('/productos/{producto}', 'Productos\ProductosController@indexProductoDetalle')->name('producto');

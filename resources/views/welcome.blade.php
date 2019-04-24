@@ -85,21 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-                <div>
-                    <select name="tecnico_id" class="form-control">
-                    @foreach ($tecnicos as $tecnico)
-                        <option value="{{ $tecnico->tec_id }}">{{ $tecnico->tec_nombre }}</option>
-                    @endforeach
-                    
-                    </select>
+                    <a href="#">La gestión documental del laboratorio dental Ramón Beses</a>
                 </div>
             </div>
         </div>
