@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\Clientes;
 
 use App\Cliente;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ClientesController extends Controller
 {
     /**
      * Crea una instancia del controlador de clientes
      * comprobando antes la autenticación
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -25,8 +24,7 @@ class ClientesController extends Controller
      */
     public function indexClientes()
     {
-        // $clientes = DB::table('cliente')->get();
-        $clientes = Cliente::all();
+        $clientes = Cliente::orderBy('cli_id', 'desc')->paginate(3);
 
         return view('clientes.clientes', compact('clientes'));
     }
@@ -35,12 +33,52 @@ class ClientesController extends Controller
      * Muestra la ventana de clientes
      * Con el listado de clientes
      */
-    public function indexClienteDetalle(Cliente $cliente)
+    public function indexCliente(Cliente $cliente)
     {
-        // Al usar findOrFail en lugar de solo find se redirigirá al blade de error si se diera alguno
-        // Aunque ni siquiera hace falta hacerlo
-        // $cliente = Cliente::findOrFail($id);
-
         return view('clientes.cliente', compact('cliente'));
+    }
+
+    /**
+     * Abre la ventana del cliente pero con un cliente nuevo con los atributos vacíos
+     */
+    public function crearCliente()
+    {
+        return view('clientes.cliente');
+    }
+
+    public function guardarCliente(Request $request)
+    {
+            $request->validate([
+                'cli_nif' => 'required', 
+                'cli_nombre' => 'required', 
+                'cli_nombre_corto' => 'required', 
+                'cli_cod_pos' => 'required',
+                'cli_ciudad' => 'required',
+                'cli_municipio' => 'nullable',
+                'cli_direccion' => 'required'
+            ]);
+    
+            Cliente::create($request->all());
+            Session::flash('confirmacion','Se ha guardado correctamente');
+    
+            return redirect('/clientes');
+    }
+
+    public function editarCliente(Request $request, Cliente $cliente)
+    {
+        $request->validate([
+            'cli_nif' => 'required', 
+            'cli_nombre' => 'required', 
+            'cli_nombre_corto' => 'required', 
+            'cli_cod_pos' => 'required',
+            'cli_ciudad' => 'required',
+            'cli_municipio' => 'nullable',
+            'cli_direccion' => 'required'
+        ]);
+
+        $cliente->update($request->all());
+
+        Session::flash('confirmacion','Se ha editado correctamente');
+        return redirect('/clientes');
     }
 }

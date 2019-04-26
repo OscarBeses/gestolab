@@ -38,9 +38,18 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 // Ruta de home que aparece cuando se hace login
 Route::get('/home', 'HomeController@index');
+
 // Ruta clientes y clientes/cli_id
 Route::get('/clientes', 'Clientes\ClientesController@indexClientes')->name('clientes');
-Route::get('/clientes/{cliente}', 'Clientes\ClientesController@indexClienteDetalle')->name('cliente');
-// Ruta para productos y productos/prod_id
+Route::get('/clientes/nuevo', 'Clientes\ClientesController@crearCliente');// Esta ruta muestra la vista para crear
+Route::put('/clientes/nuevo', 'Clientes\ClientesController@guardarCliente')->name('cliente.guardar');// Esta guarda el nuevo cliente
+Route::get('/clientes/{cliente}', 'Clientes\ClientesController@indexCliente')->name('cliente');
+Route::post('/clientes/{cliente}/editar', 'Clientes\ClientesController@editarCliente')->name('cliente.editar');// Este edita el que se le pase
+
+// Ruta para productos y productos/prd_id
 Route::get('/productos', 'Productos\ProductosController@indexProductos')->name('productos');
 Route::get('/productos/{producto}', 'Productos\ProductosController@indexProductoDetalle')->name('producto');
+
+// Ruta para albaranes y albaranes/prod_id
+Route::get('/albaranes', 'Albaranes\AlbaranesController@indexAlbaranes')->name('albaranes');
+Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@indexAlbaranDetalle')->name('albaran');
