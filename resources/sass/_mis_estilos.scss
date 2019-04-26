@@ -7,6 +7,17 @@ html, body {
     margin: 0;
   }
   
+  .links > a, .links > p {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+
   .navbar-laravel {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -39,18 +50,12 @@ html, body {
   .title {
     font-size: 84px;
   }   
-  
-  .links > a {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .1rem;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  
+    
   .m-b-md {
     margin-bottom: 30px;
+  }
+
+  .boton-editar{
+    padding: 5px 4px 6px 7px;
   }
   

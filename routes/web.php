@@ -2,24 +2,20 @@
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Rutas Web
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Aquí es donde puede registrar rutas web para su aplicación. 
+| RouteServiceProvider carga estas rutas dentro de un grupo que 
+| contiene el grupo de middleware "web". Ahora crea algo genial!
 |
 */
 
-Route::get('/', function () {
-
-    $connection = DB::connection("mysql");
-    $sql = "select * from tecnico";
-    $tecnicos = $connection->select($sql);
-    
-    return view('welcome', compact('tecnicos'));
-});
-
+/*
+|--------------------------------------------------------------------------
+| RUTAS GENERADAS AUTOMATICAMENTE (con make:auth)
+|--------------------------------------------------------------------------
+*/
 // Rutas de login y logout...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -39,6 +35,22 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 // Ruta de home que aparece cuando se hace login
 Route::get('/home', 'HomeController@index');
 
+/*
+|--------------------------------------------------------------------------
+| RUTAS GENERADAS POR MI
+|--------------------------------------------------------------------------
+*/
+/**
+ * Ruta principal en la que solo compruebo si se tiene la sesión iniciada:
+ *  - NO: Devuelve la ventana de welcome
+ *  - SI: Entra directamente a home
+ */ 
+Route::get('/', function () {
+    if(Auth::check())
+        return redirect('/home');
+    else
+        return view('welcome');
+})->name('welcome');
 // Ruta clientes y clientes/cli_id
 Route::get('/clientes', 'Clientes\ClientesController@indexClientes')->name('clientes');
 Route::get('/clientes/nuevo', 'Clientes\ClientesController@crearCliente');// Esta ruta muestra la vista para crear

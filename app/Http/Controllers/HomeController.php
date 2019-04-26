@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Crea una instancia de home sólo si el usuario está autenticado 
      */
     public function __construct()
     {
@@ -15,9 +13,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * Muestra el home de la aplicación
      */
     public function index()
     {

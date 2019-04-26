@@ -25,21 +25,43 @@
 
 </head>
 
-<body id="app">
+<body id="app" class="container-fluid">
 
-    <!-- BARRRA DE NAVEGACIÓN -->
-    @include('componentes/nav')
+    @auth
+        <!-- BARRRA DE NAVEGACIÓN -->
+        @include('componentes/nav')
+    @else
+        <!-- BOTONES SUPERIORES DE LOGIN, ETC -->
+        <div class="row top-right links">
+            @if (Request::is('login*'))
+                <a href="{{ route('welcome') }}">Página principal</a>
+            @elseif (Request::is('/'))
+                <a href="{{ route('login') }}">Iniciar sesión</a>
+            @else
+                <a href="{{ route('welcome') }}">Página principal</a>
+                <a href="{{ route('login') }}">Iniciar sesión</a>
+            @endif
+        </div>
+    @endauth
 
-    <!-- SIDEBAR Y MAIN -->
     <div class="row">
-        <!-- SIDEBAR IZQUIERDA -->
-        @include('componentes/aside')
-        <!-- CONTENIDO -->
-        <main class="col-sm-12 col-md-7 py-4">
+
+        @auth
+            <!-- SIDEBAR IZQUIERDA -->
+            @include('componentes/aside')
+        @endauth        
+
+        <!-- CONTENIDO PRINCIPAL -->
+        @guest
+         <main class="col-12">
+        @else
+         <main class="col-sm-12 col-md-7 py-4">
+        @endguest
             @yield('content')
-        </main>
+         </main>
+
     </div>
-    
+
 </body>
 
 </html>

@@ -26,7 +26,7 @@ class ProductosController extends Controller
     public function indexProductos()
     {
         // $productos = DB::table('producto')->get();
-        $productos = Producto::all();
+        $productos = Producto::orderBy('prd_id', 'desc')->paginate(3);
 
         return view('productos.productos', compact('productos'));
     }

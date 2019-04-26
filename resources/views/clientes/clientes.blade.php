@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-        <a href="{{ url('/clientes/nuevo') }}" class="btn btn-info">Crear nuevo cliente</a>
+        <a href="{{ url('/clientes/nuevo') }}" class="btn btn-info">Nuevo cliente</a>
     </div>
 
     <ul class="list-group my-3">
@@ -32,7 +32,7 @@
                     <p class="mb-1">{{ $cliente->cli_municipio }}</p>
                 @endisset
                 <small>{{ 'C.P. ' . $cliente->cli_cod_pos . ' - ' . $cliente->cli_ciudad}}</small>
-                <a href="{{ route('cliente', [$cliente->cli_id]) }}" class="btn btn-primary btn-sm float-right">
+                <a href="{{ route('cliente', [$cliente->cli_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
                     <i class="fas fa-edit fa-lg p-1"></i>
                 </a>
             </li>
