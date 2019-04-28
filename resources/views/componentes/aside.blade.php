@@ -1,4 +1,4 @@
-<aside class="row container col-md-3 col-sm-12 justify-content-center sidebar-sticky py-4">
+<aside class="container row col-md-3 col-sm-12 justify-content-center sidebar-sticky py-4">
     <ul class="nav row flex-column">
         <li class="nav-item">
             <a class="nav-link active" href="{{ url('/home') }}">

@@ -23,7 +23,7 @@ class AlbaranesController extends Controller
      * Muestra la ventana de albaranes
      * Con el listado de albaranes
      */
-    public function indexAlbaranes()
+    public function mostrarAlbaranes()
     {
         // $albaranes = DB::table('albaran')->get();
         $albaranes = Albaran::all();
@@ -35,7 +35,7 @@ class AlbaranesController extends Controller
      * Muestra la ventana de albaranes
      * Con el listado de albaranes
      */
-    public function indexAlbaranDetalle(Albaran $albaran)
+    public function mostrarAlbaran(Albaran $albaran)
     {
         // Al usar findOrFail en lugar de solo find se redirigirá al blade de error si se diera alguno
         // Aunque ni siquiera hace falta hacerlo

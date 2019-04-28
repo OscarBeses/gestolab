@@ -15,7 +15,7 @@ class HomeController extends Controller
     /**
      * Muestra el home de la aplicación
      */
-    public function index()
+    public function mostrarHome()
     {
         return view('home');
     }

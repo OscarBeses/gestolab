@@ -22,7 +22,7 @@ class ClientesController extends Controller
      * Muestra la ventana de clientes
      * Con el listado de clientes
      */
-    public function indexClientes()
+    public function mostrarClientes()
     {
         $clientes = Cliente::orderBy('cli_id', 'desc')->paginate(3);
 
@@ -33,7 +33,7 @@ class ClientesController extends Controller
      * Muestra la ventana de clientes
      * Con el listado de clientes
      */
-    public function indexCliente(Cliente $cliente)
+    public function mostrarCliente(Cliente $cliente)
     {
         return view('clientes.cliente', compact('cliente'));
     }
@@ -43,7 +43,8 @@ class ClientesController extends Controller
      */
     public function crearCliente()
     {
-        return view('clientes.cliente');
+        $cliente = new Cliente();
+        return view('clientes.cliente', compact('cliente'));
     }
 
     public function guardarCliente(Request $request)

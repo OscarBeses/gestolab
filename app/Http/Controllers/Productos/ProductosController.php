@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Productos;
 
 use App\Producto;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProductosController extends Controller
@@ -23,7 +22,7 @@ class ProductosController extends Controller
      * Muestra la ventana de productos
      * Con el listado de productos
      */
-    public function indexProductos()
+    public function mostrarProductos()
     {
         // $productos = DB::table('producto')->get();
         $productos = Producto::orderBy('prd_id', 'desc')->paginate(3);
@@ -35,12 +34,46 @@ class ProductosController extends Controller
      * Muestra la ventana de productos
      * Con el listado de productos
      */
-    public function indexProductoDetalle(Producto $producto)
+    public function mostrarProducto(Producto $producto)
     {
-        // Al usar findOrFail en lugar de solo find se redirigirá al blade de error si se diera alguno
-        // Aunque ni siquiera hace falta hacerlo
-        // $producto = Producto::findOrFail($id);
-
         return view('productos.producto', compact('producto'));
     }
+
+    /**
+     * Abre la ventana del producto pero con un producto nuevo con los atributos vacíos
+     */
+    public function mostrarProductoNuevo()
+    {
+        $producto = new Producto();
+        return view('productos.producto', compact('producto'));
+    }
+
+    public function guardarProducto(Request $request)
+    {
+            $request->validate([
+                'prd_descripcion' => 'required',
+                'prd_importe' => 'required',
+                'prd_observaciones' => 'nullable'
+            ]);
+    
+            Producto::create($request->all());
+            Session::flash('confirmacion','Se ha guardado correctamente');
+    
+            return redirect('/productos');
+    }
+
+    public function editarProducto(Request $request, Producto $producto)
+    {
+        $request->validate([
+            'prd_descripcion' => 'required',
+            'prd_importe' => 'required',
+            'prd_observaciones' => 'nullable'
+        ]);
+
+        $producto->update($request->all());
+
+        Session::flash('confirmacion','Se ha editado correctamente');
+        return redirect('/productos');
+    }
+
 }

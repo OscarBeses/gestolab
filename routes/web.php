@@ -33,7 +33,7 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 // Ruta de home que aparece cuando se hace login
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@mostrarHome');
 
 /*
 |--------------------------------------------------------------------------
@@ -52,16 +52,19 @@ Route::get('/', function () {
         return view('welcome');
 })->name('welcome');
 // Ruta clientes y clientes/cli_id
-Route::get('/clientes', 'Clientes\ClientesController@indexClientes')->name('clientes');
-Route::get('/clientes/nuevo', 'Clientes\ClientesController@crearCliente');// Esta ruta muestra la vista para crear
-Route::put('/clientes/nuevo', 'Clientes\ClientesController@guardarCliente')->name('cliente.guardar');// Esta guarda el nuevo cliente
-Route::get('/clientes/{cliente}', 'Clientes\ClientesController@indexCliente')->name('cliente');
-Route::post('/clientes/{cliente}/editar', 'Clientes\ClientesController@editarCliente')->name('cliente.editar');// Este edita el que se le pase
+Route::get('/clientes', 'Clientes\ClientesController@mostrarClientes')->name('clientes');// Muestra la vista con los clientes
+Route::get('/clientes/nuevo', 'Clientes\ClientesController@crearCliente');// Muestra la vista para crear uno nuevo
+Route::put('/clientes/nuevo', 'Clientes\ClientesController@guardarCliente')->name('cliente.guardar');// Guarda el nuevo cliente
+Route::get('/clientes/{cliente}', 'Clientes\ClientesController@mostrarCliente')->name('cliente');// Muestra el detalle de un cliente
+Route::post('/clientes/{cliente}/editar', 'Clientes\ClientesController@editarCliente')->name('cliente.editar');// Edita el cliente
 
 // Ruta para productos y productos/prd_id
-Route::get('/productos', 'Productos\ProductosController@indexProductos')->name('productos');
-Route::get('/productos/{producto}', 'Productos\ProductosController@indexProductoDetalle')->name('producto');
+Route::get('/productos', 'Productos\ProductosController@mostrarProductos')->name('productos');// Muestra los productos
+Route::get('/productos/nuevo', 'Productos\ProductosController@crearProducto');// Muestra la vista para crear uno nuevo
+Route::put('/productos/nuevo', 'Productos\ProductosController@guardarProducto')->name('producto.guardar');// Guarda el nuevo producto
+Route::get('/productos/{producto}', 'Productos\ProductosController@mostrarProducto')->name('producto');// Muestra el detalle del producto
+Route::post('/productos/{producto}/editar', 'Productos\ProductosController@editarProducto')->name('producto.editar');// Edita el producto
 
 // Ruta para albaranes y albaranes/prod_id
-Route::get('/albaranes', 'Albaranes\AlbaranesController@indexAlbaranes')->name('albaranes');
-Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@indexAlbaranDetalle')->name('albaran');
+Route::get('/albaranes', 'Albaranes\AlbaranesController@mostrarAlbaranes')->name('albaranes');
+Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');

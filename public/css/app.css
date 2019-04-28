@@ -10678,7 +10678,7 @@ body {
   padding: 0 25px;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.08rem;
   text-decoration: none;
   text-transform: uppercase;
   z-index: 1;
@@ -10705,7 +10705,7 @@ body {
 
 .top-right {
   position: absolute;
-  right: 10px;
+  right: 1%;
   top: 18px;
 }
 
@@ -10723,5 +10723,9 @@ body {
 
 .boton-editar {
   padding: 5px 4px 6px 7px;
+}
+
+.form-row > .form-group:first-child {
+  padding-left: 0px;
 }
 
