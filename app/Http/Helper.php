@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 class Helper {
 
     /**
@@ -9,6 +11,7 @@ class Helper {
     public static function getDatoAnterior($obj, $atb) {
         
         $objOld = old($atb);
+        $atb = Helper::corrigeAtributo($atb);
         if(isset($obj))
             $objBd = $obj->$atb;
 
@@ -19,7 +22,23 @@ class Helper {
             $respuesta = $objBd;
         }
         
+        if($respuesta instanceof Carbon) {
+            // Este formato es el que acepta el input date
+            $respuesta = $respuesta->format('Y-m-d');
+        }
+
         return $respuesta;
+    }
+
+    private static function corrigeAtributo($atb) {
+        switch ($atb) {
+            case 'lab_id':
+                return 'laboratorio';
+            case 'cli_id':
+                return 'cliente';
+            default:
+                return $atb;
+        }
     }
 
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Productos;
 
 use App\Producto;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductosController extends Controller
 {

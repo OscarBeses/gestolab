@@ -8,24 +8,16 @@
     </div>
 
     <!-- Si hay errores en el formulario por parte del servidor los muestro encima -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('componentes/mensajesErrores')
 
     <!-- 
-        Uso un formulario put hacia la ruta de guardar si hay un cliente
-        Y uso uno de tipo hacia la ruta de editar si no hay cliente
+        Uso un formulario PUT hacia la ruta de guardar si hay un cliente
+        Y uso uno de tipo POST hacia la ruta de editar si no hay cliente
     -->
     @isset($cliente->cli_id)
-    <form class="form-group" action="{{ route('cliente.editar', $cliente->cli_id) }}" method="post">
+    <form class="form-group" action="{{ route('cliente.editar', $cliente->cli_id) }}" method="POST">
     @else
-    <form class="form-group" action="{{ route('cliente.guardar') }}" method="post">
+    <form class="form-group" action="{{ route('cliente.guardar') }}" method="POST">
     @method('put')
     @endisset
         @csrf        

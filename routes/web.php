@@ -53,18 +53,21 @@ Route::get('/', function () {
 })->name('welcome');
 // Ruta clientes y clientes/cli_id
 Route::get('/clientes', 'Clientes\ClientesController@mostrarClientes')->name('clientes');// Muestra la vista con los clientes
-Route::get('/clientes/nuevo', 'Clientes\ClientesController@crearCliente');// Muestra la vista para crear uno nuevo
+Route::get('/clientes/nuevo', 'Clientes\ClientesController@mostrarClienteNuevo');// Muestra la vista para crear uno nuevo
 Route::put('/clientes/nuevo', 'Clientes\ClientesController@guardarCliente')->name('cliente.guardar');// Guarda el nuevo cliente
 Route::get('/clientes/{cliente}', 'Clientes\ClientesController@mostrarCliente')->name('cliente');// Muestra el detalle de un cliente
 Route::post('/clientes/{cliente}/editar', 'Clientes\ClientesController@editarCliente')->name('cliente.editar');// Edita el cliente
 
 // Ruta para productos y productos/prd_id
 Route::get('/productos', 'Productos\ProductosController@mostrarProductos')->name('productos');// Muestra los productos
-Route::get('/productos/nuevo', 'Productos\ProductosController@crearProducto');// Muestra la vista para crear uno nuevo
+Route::get('/productos/nuevo', 'Productos\ProductosController@mostrarProductoNuevo');// Muestra la vista para crear uno nuevo
 Route::put('/productos/nuevo', 'Productos\ProductosController@guardarProducto')->name('producto.guardar');// Guarda el nuevo producto
 Route::get('/productos/{producto}', 'Productos\ProductosController@mostrarProducto')->name('producto');// Muestra el detalle del producto
 Route::post('/productos/{producto}/editar', 'Productos\ProductosController@editarProducto')->name('producto.editar');// Edita el producto
 
 // Ruta para albaranes y albaranes/prod_id
-Route::get('/albaranes', 'Albaranes\AlbaranesController@mostrarAlbaranes')->name('albaranes');
-Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');
+Route::get('/albaranes', 'Albaranes\AlbaranesController@mostrarAlbaranes')->name('albaranes');// Muestra los albaranes
+Route::get('/albaranes/nuevo', 'Albaranes\AlbaranesController@mostrarAlbaranNuevo');// Muestra la vista para crear uno nuevo
+Route::put('/albaranes/nuevo', 'Albaranes\AlbaranesController@guardarAlbaran')->name('albaran.guardar');// Guarda el nuevo albaran
+Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');// Muestra el detalle del albaran
+Route::post('/albaranes/{albaran}/editar', 'Albaranes\AlbaranesController@editarAlbaran')->name('albaran.editar');// Edita el albaran

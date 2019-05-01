@@ -4,57 +4,39 @@
 <div class="container">
 
     <div class="row justify-content-center">
-        <h2>Producto: {{$producto->prd_descripcion }}</h2>
-    </div>
-    <div class="row justify-content-center">
-        <p>{{$producto->prd_importe}}</p>
-    </div>
-    <div class="row justify-content-center">
-        <p>{{$producto->prd_observaciones}}</p>
-    </div>
-    {{-- <div class="row justify-content-center">
-        <p>{{$producto->prd_borrado}}</p>
-    </div> --}}
-
-    <div class="row justify-content-center">
         <h2>Crear o modificar producto</h2>
     </div>
 
     <!-- Si hay errores en el formulario por parte del servidor los muestro encima -->
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    @include('componentes/mensajesErrores')
 
     <!-- 
-        Uso un formulario put hacia la ruta de guardar si hay un producto
-        Y uso uno de tipo hacia la ruta de editar si no hay producto
+        Uso un formulario PUT hacia la ruta de guardar si hay un producto
+        Y uso uno de tipo POST hacia la ruta de editar si no hay producto
     -->
     @isset($producto->prd_id)
-    <form class="form-group" action="{{ route('producto.editar', $producto->prd_id) }}" method="post">
+    <form class="form-group" action="{{ route('producto.editar', $producto->prd_id) }}" method="POST">
     @else
-    <form class="form-group" action="{{ route('producto.guardar') }}" method="post">
-    @method('put')
+    <form class="form-group" action="{{ route('producto.guardar') }}" method="POST">
+    @method('PUT')
     @endisset
         @csrf        
         <div class="form-row">
-            <div class="form-group col-md-8 col-sm-12">
+            <div class="col-lg-8 col-md-12">
                 <label for="descrip">Descripción</label>
                 <input type="text" class="form-control" id="descrip" placeholder="Descripción" name="prd_descripcion" 
                     value="{{ Helper::getDatoAnterior($producto, 'prd_descripcion') }}">
             </div>
-            <div class="form-group col-md-4 col-sm-12">
+            <div class="col-lg-4 col-md-12">
                 <label for="importe">Importe</label>
-                <input type="text" class="form-control" id="importe" placeholder="Importe del producto" name="prd_importe" 
-                    value="{{ Helper::getDatoAnterior($producto, 'prd_importe') }}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Importe" aria-describedby="euro-span"
+                        value="{{ Helper::getDatoAnterior($producto, 'prd_importe') }}" id="importe" name="prd_importe" >
+                    <div class="input-group-append"> <span class="input-group-text" id="euro-span">€</span> </div>
+                </div>
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-group">
             <label for="observaciones">Observaciones</label>
             <input type="text" class="form-control" id="observaciones" placeholder="Observaciones" name="prd_observaciones" 
                 value="{{ Helper::getDatoAnterior($producto, 'prd_observaciones') }}">

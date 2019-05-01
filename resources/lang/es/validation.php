@@ -151,6 +151,10 @@ return [
         'cli_ciudad' => 'ciudad',
         'cli_direccion' => 'dirección',
         'cli_nombre_corto' => 'nombre corto',
+
+        'prd_descripcion ' => 'descripcion',
+        'prd_importe ' => 'importe',
+        'prd_observaciones' => 'observaciones',
         
     ],
 

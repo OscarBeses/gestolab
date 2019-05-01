@@ -41,7 +41,7 @@ class ClientesController extends Controller
     /**
      * Abre la ventana del cliente pero con un cliente nuevo con los atributos vacíos
      */
-    public function crearCliente()
+    public function mostrarClienteNuevo()
     {
         $cliente = new Cliente();
         return view('clientes.cliente', compact('cliente'));
@@ -49,20 +49,20 @@ class ClientesController extends Controller
 
     public function guardarCliente(Request $request)
     {
-            $request->validate([
-                'cli_nif' => 'required', 
-                'cli_nombre' => 'required', 
-                'cli_nombre_corto' => 'required', 
-                'cli_cod_pos' => 'required',
-                'cli_ciudad' => 'required',
-                'cli_municipio' => 'nullable',
-                'cli_direccion' => 'required'
-            ]);
-    
-            Cliente::create($request->all());
-            Session::flash('confirmacion','Se ha guardado correctamente');
-    
-            return redirect('/clientes');
+        $request->validate([
+            'cli_nif' => 'required', 
+            'cli_nombre' => 'required', 
+            'cli_nombre_corto' => 'required', 
+            'cli_cod_pos' => 'required',
+            'cli_ciudad' => 'required',
+            'cli_municipio' => 'nullable',
+            'cli_direccion' => 'required'
+        ]);
+
+        Cliente::create($request->all());
+        Session::flash('confirmacion','Se ha guardado correctamente');
+
+        return redirect('/clientes');
     }
 
     public function editarCliente(Request $request, Cliente $cliente)

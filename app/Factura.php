@@ -18,11 +18,15 @@ class Factura extends Model
     /**
      * Propiedades que pueden ser rellenadas por el usuario
      */
-    protected $filfacle = [
+    protected $fillable = [
         'fac_id',
 	    'fac_numero',
         'fac_fecha_emision'
     ];
+    /**
+     * Con esto indico los campos que son fechas (instancias de Carbon)
+     */
+    protected $dates = ['fac_fecha_emision'];
     /** Hay que poner este atributo a false para que no presuponga que tenemos fecha de creación y fecha de modificación */
     public $timestamps = false;
 

@@ -27,6 +27,11 @@ class Albaran extends Model
         'alb_fecha_entrega',
         'fac_id'
     ];
+    /**
+     * Con esto indico los campos que son fechas (instancias de Carbon)
+     */
+    protected $dates = ['alb_fecha_emision', 'alb_fecha_entrega'];
+
     /** Hay que poner este atributo a false para que no presuponga que tenemos fecha de creación y fecha de modificación */
     public $timestamps = false;
 
@@ -61,6 +66,41 @@ class Albaran extends Model
         return $this->hasMany(Trabajo::class, 'alb_id');
     }
 
+    /**
+     * Devuelve la suma de los importes de todos los trabajos
+     */
+    public function dameTotal() {
+        $total = 0;
+        foreach ($this->trabajos as $trabajo) {
+           $total += $trabajo->tra_precio_unidad * $trabajo->tra_cantidad;
+        }
+        return $total;
+    }
+
+    /**
+     * Obtiene y devuelve una cadena que contiene parte de las descripciones 
+     * de los trabajos que contiene el albarán
+     */
+    public function getCadenaTrabajos() {
+        $cadenaTrabajos = '';
+        foreach ($this->trabajos as $trabajo) {
+           $cadenaTrabajos .= $trabajo->tra_descripcion . ', ' ;
+        }
+
+        $longitud = mb_strlen($cadenaTrabajos);
+        if ($longitud > 50) {
+            $cadenaTrabajos = substr($cadenaTrabajos, 0, 50);
+            $cadenaTrabajos .= '...'; 
+        } else if ($longitud > 0){
+            $cadenaTrabajos = substr($cadenaTrabajos, 0, $longitud);
+        }
+
+        return $cadenaTrabajos;
+    }
+
+    /**
+     * Muestra el nº albaran y el cliente, ciudad, fecha_emision
+     */
     public function __toString() {
         return $this->alb_numero . ' Cliente:' . $this->cliente->cli_nombre_corto .' '.$this->cli_ciudad .' '.$this->alb_fecha_emision;
     }

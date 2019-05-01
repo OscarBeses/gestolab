@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Laboratorio;
+use App\UsuarioLaboratorio;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,5 +69,24 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * Sobreescribo el método registered para que,
+     * tras guardar al usuario, antes de redireccionar al home, 
+     * guarde un registro en UsuarioLaboratorio que enlace a ese usuario
+     * con el laboratorio.
+     */
+    protected function registered(Request $request, $user)
+    {
+        /* Cojo el laboratorio */
+        $lab = Laboratorio::where('lab_nif', '19891050Y')->firstOrFail();
+
+        $usuLab = new UsuarioLaboratorio();
+        $usuLab->lab_id = $lab->lab_id;
+        $usuLab->usu_id = $user->id;
+        $usuLab->save();
+
+        redirect($this->redirectPath());
     }
 }

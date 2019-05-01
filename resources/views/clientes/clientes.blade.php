@@ -8,13 +8,7 @@
     </div>
 
     <!-- Si hay un mensaje de confirmación en la sesión lo muestro -->
-    <div>
-        @if ($message = Session::get('confirmacion'))
-        <div class="alert alert-success justify-content-center">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
-    </div>
+    @include('componentes/mensajeConfirmacion')
 
     <div class="row">
         <a href="{{ url('/clientes/nuevo') }}" class="btn btn-info">Nuevo cliente</a>
@@ -22,7 +16,7 @@
 
     <ul class="list-group my-3">
         @forelse ($clientes as $cliente)
-            <li class="list-group-item list-group-item-action flex-column align-items-start">
+            <li class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ $cliente->cli_nombre }}</h5>
                     <small>{{ $cliente->cli_nombre_corto }}</small>

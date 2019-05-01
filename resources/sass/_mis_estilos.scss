@@ -58,10 +58,3 @@ html, body {
   .boton-editar{
     padding: 5px 4px 6px 7px;
   }
-  
-  /*
-  * Esto es para arreglar una diferencia de alineado que se genera en el caso de un form group al lado de un form-row
-  */
-  .form-row > .form-group:first-child {
-    padding-left: 0px;
-  }
