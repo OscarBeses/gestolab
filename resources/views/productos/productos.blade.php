@@ -25,7 +25,7 @@
                     <p class="col">{{ $producto->prd_observaciones }}</p>
                     <div class="col-xs-1">
                         <a href="{{ route('producto', [$producto->prd_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
-                            <i class="fas fa-edit fa-lg p-1"></i>
+                            <i class="far fa-edit"></i>
                         </a>
                     </div>
                 </div>

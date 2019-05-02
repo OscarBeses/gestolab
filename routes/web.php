@@ -71,3 +71,6 @@ Route::get('/albaranes/nuevo', 'Albaranes\AlbaranesController@mostrarAlbaranNuev
 Route::put('/albaranes/nuevo', 'Albaranes\AlbaranesController@guardarAlbaran')->name('albaran.guardar');// Guarda el nuevo albaran
 Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');// Muestra el detalle del albaran
 Route::post('/albaranes/{albaran}/editar', 'Albaranes\AlbaranesController@editarAlbaran')->name('albaran.editar');// Edita el albaran
+
+//Ruta trabajos del albarán
+Route::delete('/trabajos/{trabajo}/eliminar', 'Trabajos\TrabajosController@eliminarTrabajo')->name('trabajo.eliminar');

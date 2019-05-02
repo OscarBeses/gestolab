@@ -27,7 +27,7 @@
                 @endisset
                 <small>{{ 'C.P. ' . $cliente->cli_cod_pos . ' - ' . $cliente->cli_ciudad}}</small>
                 <a href="{{ route('cliente', [$cliente->cli_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
-                    <i class="fas fa-edit fa-lg p-1"></i>
+                    <i class="far fa-edit"></i>
                 </a>
             </li>
         @empty
