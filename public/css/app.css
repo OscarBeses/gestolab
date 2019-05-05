@@ -10662,6 +10662,16 @@ a.text-dark:focus {
   }
 }
 
+@media (max-width: 991.98px) {
+  .hide-md {
+    display: none;
+  }
+
+  .input-ancho {
+    height: 75px;
+  }
+}
+
 html,
 body {
   background-color: #fff;

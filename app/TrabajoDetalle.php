@@ -4,36 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class TrabajoDetalle extends Model
 {
     /** 
      * Le indico el nombre de la tabla,
      * podría detectarlo automaticamente si la tabla
-     * se llamara clientes
+     * se llamara trabajoDetalles
      */
-    protected $table = 'cliente';
+    protected $table = 'trabajo_detalle';
     /**
      * Con esta propiedad le indico a laravel
-     * que mi PK no es id sino cli_id
+     * que mi PK no es id sino trd_id
      */
-    protected  $primaryKey = 'cli_id';
+    protected  $primaryKey = 'trd_id';
     /**
      * Propiedades que pueden ser rellenadas por el usuario
      */
     protected $fillable = [
-        'cli_id', 
-        'cli_nif', 
-        'cli_nombre', 
-        'cli_nombre_corto', 
-        'cli_cod_pos', 
-        'cli_ciudad', 
-        'cli_municipio', 
-        'cli_direccion'
+        'trd_odontologo',
+        'trd_paciente',
+        'tra_id',
     ];
     /** Hay que poner este atributo a false para que no presuponga que tenemos fecha de creación y fecha de modificación */
     public $timestamps = false;
 
     public function __toString() {
-        return $this->cli_nombre_corto . ' ' . $this->cli_direccion .' '.$this->cli_ciudad .'-'.$this->cli_cod_pos .' '. $this->cli_nif;
+        return $this->trd_odontologo . ' ' . $this->trd_paciente .' '.$this->tra_id;
     }
 }

@@ -65,7 +65,7 @@ create table laboratorio_detalle (
 
 create table usuario_laboratorio (
 	usl_id bigint(20) unsigned auto_increment,
-	usu_id bigint(20) UNSIGNED NOT NULL,
+	usu_id bigint(20) unsigned NOT NULL,
 	lab_id bigint(20) unsigned,
 	foreign key (usu_id) references users(id),
 	foreign key (lab_id) references laboratorio(lab_id),
@@ -96,7 +96,7 @@ create table albaran (
 
 create table trabajo (
 	tra_id bigint(20) unsigned auto_increment,
-    tra_descripcion varchar(75),
+    tra_observaciones varchar(75),
 	tra_cantidad bigint(20) unsigned,
 	tra_precio_unidad double,
 	prd_id bigint(20) unsigned,
@@ -132,16 +132,13 @@ create table tecnico_trabajo (
 ) COMMENT 'Los trabajos de cada tecnico';
 
 /* CREO EL ÚNICO USUARIO QUE TENDÁ LA APLICACIÓN */
-INSERT INTO users (name, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES
-('oscar', 'oscar.beses@gmail.com', NULL, '$2y$10$uXLjfPTSiM/zi4DBVjQiQukGblbFioyhS8OB.t9qoxyirpqpP9zlW', 'PpRYAxk4tmMOrRkFEltW9Gf0UqYZuCGQsFGsmdhl6tw2n5bp0GW3ZYU1aXiH', '2019-04-22 17:34:07', '2019-04-22 17:34:07');
-
+INSERT INTO users (id, name, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES
+(111, 'oscar', 'oscar.beses@gmail.com', NULL, '$2y$10$uXLjfPTSiM/zi4DBVjQiQukGblbFioyhS8OB.t9qoxyirpqpP9zlW', 'PpRYAxk4tmMOrRkFEltW9Gf0UqYZuCGQsFGsmdhl6tw2n5bp0GW3ZYU1aXiH', '2019-04-22 17:34:07', '2019-04-22 17:34:07');
 /* CREO DATOS DE PRUEBA SIMULANDO UN FLUJO DE TRABAJO NORMAL */
 INSERT INTO laboratorio (lab_id, lab_nif, lab_nombre, lab_nombre_corto, lab_cod_pos, lab_ciudad, lab_municipio, lab_direccion) 
 	VALUES (22, '19891050Y', 'RAMÓN BESES SORIA', 'RAMÓN BESES', '46024', 'Valencia', NULL, 'Calle del parque de Nazaret 44 Bajo');
-/* 
 INSERT INTO usuario_laboratorio (usu_id, lab_id) 
-	VALUES (11, 22);
-*/
+	VALUES (111, 22);
 /* Primer cliente */
 INSERT INTO cliente (cli_id, cli_nif, cli_nombre, cli_nombre_corto, cli_cod_pos, cli_ciudad, cli_municipio, cli_direccion) 
 	VALUES (33, 'G28423275', 'Universidad Cardenal Herrera-CEU \"Clínica Odontológica"', 'CEU', '46113', 'Valencia', 'Moncada', 'Edificio Seminario S/N');
@@ -159,10 +156,10 @@ INSERT INTO tecnico (tec_id, tec_nombre)
 INSERT INTO albaran (alb_id, alb_numero, cli_id, lab_id, alb_fecha_emision, fac_id) 
 	VALUES (44, 4, 33, 22, NULL, NULL);
 /* Creo un trabajo que no coincide exactamente con el precio del producto por un supuesto descuento */
-INSERT INTO trabajo (tra_id, tra_descripcion, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
-	VALUES (5, 'Arreglo de corona ceranometálica', 3, 1, '45.00', 44);
-INSERT INTO trabajo (tra_id, tra_descripcion, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
-	VALUES (51, 'Arreglo de corona ceranometálica', 3, 2, '1.11', 44);
+INSERT INTO trabajo (tra_id, tra_observaciones, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
+	VALUES (5, null, 3, 1, '45.00', 44);
+INSERT INTO trabajo (tra_id, tra_observaciones, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
+	VALUES (51, 'Un comentario sin mas', 3, 2, '1.11', 44);
 INSERT INTO trabajo_detalle (trd_id, trd_odontologo, trd_paciente, tra_id) 
 	VALUES (NULL, 'Beatriz Castillo', 'Mª. Jesús Corral', 5);
 /* Le asigno dos técnicos al mismo trabajo */
@@ -172,7 +169,6 @@ INSERT INTO tecnico_trabajo (tec_id, tra_id)
 	VALUES (2, 5);
 /* Ahora que ya se ha terminado el albarán se emite */
 UPDATE albaran SET alb_fecha_emision = '2019-03-31' WHERE alb_id = 44;
-
 /* Y ahora que ya tengo un albarán para un cliente voy a facturarlo */
 INSERT INTO factura (fac_id, fac_numero, fac_fecha_emision) 
 	VALUES (66, 6, CURDATE());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,5 +36,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * El usuario ha iniciado sesión
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    function authenticated(Request $request, $user)
+    {
+        // Meto el usuario en sesión para poder usarlo luego
+        $request->session()->put('usuario', $user->id);
+        // Y redirijo a la ruta correspondiente
+        redirect()->intended($this->redirectPath());
     }
 }

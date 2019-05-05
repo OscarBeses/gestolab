@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Trabajos;
 
+use App\Albaran;
 use App\Trabajo;
-use App\Cliente;
-use App\Laboratorio;
+use App\Producto;
+use App\TecnicoTrabajo;
+use App\TrabajoDetalle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -28,57 +30,76 @@ class TrabajosController extends Controller
      */
     public function mostrarTrabajo(Trabajo $trabajo)
     {
-        $clientes = array($trabajo->cliente);
-        return view('trabajos.trabajo', compact('trabajo', 'clientes'));
+        $productos = array($trabajo->producto);
+        return view('albaranes.trabajo', compact('trabajo', 'productos'));
     }
 
     /**
      * Abre la ventana del trabajo pero con un trabajo nuevo con los atributos vacíos
+     * y pasandole el listado de productos disponibles
      */
-    public function mostrarTrabajoNuevo()
+    public function mostrarTrabajoNuevo(Request $request, Albaran $albaran)
     {
         $trabajo = new Trabajo();
-        $trabajo->lab_id = Laboratorio::first()->lab_id; // AQUI EN VEZ DE COGER EL FIRST, COGER EL CORRESPONDIENTE AL USUARIO (o meterlo al principio en sesión y cogerlo ahora)
-        $clientes = Cliente::all();
-        return view('trabajos.trabajo', compact('trabajo', 'clientes'));
+        $trabajo->alb_id = $albaran->alb_id;
+
+        $productos = Producto::all();
+        return view('albaranes.trabajo', compact('trabajo', 'productos'));
     }
 
     public function guardarTrabajo(Request $request)
     {
         $request->validate([
-            'tra_numero' => 'required', 
-            'cli_id' => 'required', 
-            'lab_id' => 'required',
-            'tra_fecha_emision' => 'nullable',
-            'tra_fecha_entrega' => 'nullable',
-            'fac_id' => 'nullable'
+            'tra_observaciones' => 'nullable', 
+            'tra_cantidad' => 'required',
+            'tra_precio_unidad' => 'required',
+            'prd_id' => 'required',
+            'alb_id' => 'required'
         ]);
 
         Trabajo::create($request->all());
-        Session::flash('confirmacion','Se ha guardado correctamente');
+        Session::flash('confirmacion','Se ha creado correctamente');
 
-        return redirect()->back();
+        return redirect()->route('albaran', $request->get('alb_id'));
     }
 
     public function editarTrabajo(Request $request, Trabajo $trabajo)
     {
         $request->validate([
-            'tra_numero' => 'required', 
-            'cli_id' => 'required', 
-            'lab_id' => 'required',
-            'tra_fecha_emision' => 'nullable',
-            'tra_fecha_entrega' => 'nullable',
-            'fac_id' => 'nullable'
+            'tra_observaciones' => 'nullable', 
+            'tra_cantidad' => 'required',
+            'tra_precio_unidad' => 'required',
+            'prd_id' => 'required',
+            'alb_id' => 'required'
         ]);
 
         $trabajo->update($request->all());
 
-        Session::flash('confirmacion','Se ha editado correctamente');
-        return redirect()->back();
+        Session::flash('confirmacion','El trabajo ha sido editado correctamente');
+        return redirect()->route('albaran', $trabajo->alb_id);
     }
 
+    /**
+     * Primero se eliminan los tecnico_trabajo
+     * Luego los trabajo_detalle
+     * y luego el trabajo
+     */
     public function eliminarTrabajo(Trabajo $trabajo){
+        $idTrabajo = $trabajo->tra_id;
+        $idAlbaran = $trabajo->alb_id;
+
+        $trabajoDetalle = TrabajoDetalle::where('tra_id', $idTrabajo)->first();
+        if($trabajoDetalle != null)
+            $trabajoDetalle->delete();
+        
+        $tecnicosTrabajo = TecnicoTrabajo::where('tra_id', $idTrabajo)->get();
+        foreach ($tecnicosTrabajo as $tecnicoTrabajo ) {
+            $tecnicoTrabajo->delete();
+        }
+
         $trabajo->delete();
-        Session::flash('confirmacion','Se ha eliminado correctamente');
+
+        Session::flash('confirmacion','El trabajo ha sido eliminado correctamente');
+        return redirect()->route('albaran', $idAlbaran);
     }
 }

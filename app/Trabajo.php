@@ -20,7 +20,7 @@ class Trabajo extends Model
      */
     protected $fillable = [
         'tra_id',
-        'tra_descripcion',
+        'tra_observaciones',
         'tra_cantidad',
         'tra_precio_unidad',
         'prd_id',

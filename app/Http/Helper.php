@@ -30,12 +30,15 @@ class Helper {
         return $respuesta;
     }
 
+    // El name del campo es tal cual pero yo quiero devolver al html el objeto entero
     private static function corrigeAtributo($atb) {
         switch ($atb) {
             case 'lab_id':
                 return 'laboratorio';
             case 'cli_id':
                 return 'cliente';
+            case 'prd_id':
+                return 'producto';
             default:
                 return $atb;
         }

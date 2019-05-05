@@ -29,7 +29,7 @@ class Producto extends Model
     public $timestamps = false;
 
     public function __toString() {
-        return $this->prd_descripcion . ' ' . $this->prd_observaciones .' '.$this->prd_importe;
+        return $this->prd_descripcion . ' - ' . $this->prd_observaciones;
     }
 
 }

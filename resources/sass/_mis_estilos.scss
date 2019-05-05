@@ -1,68 +1,108 @@
-html, body {
-    background-color: #fff;
-    color: #636b6f;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 200;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .links > a, .links > p {
-    color: #636b6f;
-    padding: 0 25px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: .08rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    z-index: 1;
-  }
+@include media-breakpoint-up(xs) {
+}
+@include media-breakpoint-up(sm) {
+}
+@include media-breakpoint-up(md) {
+}
+@include media-breakpoint-up(lg) {
+}
+@include media-breakpoint-up(xl) {
+}
 
-  .navbar-laravel {
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-  }
-  
-  .full-height {
-    height: 100vh;
-  }
-  
-  .flex-center {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .position-ref {
-    position: relative;
-  }
-  
-  .top-right {
-    position: absolute;
-    right: 1%;
-    top: 18px;
-  }
-  
-  .content {
-    text-align: center;
-  }
-  
-  .title {
-    font-size: 84px;
-  }   
-    
-  .m-b-md {
-    margin-bottom: 30px;
-  }
+@include media-breakpoint-only(xs) {
+}
+@include media-breakpoint-only(sm) {
+}
+@include media-breakpoint-only(md) {
+}
+@include media-breakpoint-only(lg) {
+}
+@include media-breakpoint-only(xl) {
+}
 
-  .boton-editar{
-    padding-right: 6px;
+@include media-breakpoint-down(xs) {
+}
+@include media-breakpoint-down(sm) {
+  
+}
+@include media-breakpoint-down(md) {
+  .hide-md {
+    display: none;
   }
+  .input-ancho {
+    height: 75px;
+  }
+}
+@include media-breakpoint-down(lg) {
+}
 
-  .min-width-55{
-    min-width: 55px;
-  }
+html,
+body {
+  background-color: #fff;
+  color: #636b6f;
+  font-family: "Nunito", sans-serif;
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+}
 
-  .min-width-120{
-    min-width: 120px;
-  }
+.links > a,
+.links > p {
+  color: #636b6f;
+  padding: 0 25px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.position-ref {
+  position: relative;
+}
+
+.top-right {
+  position: absolute;
+  right: 1%;
+  top: 18px;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 84px;
+}
+
+.m-b-md {
+  margin-bottom: 30px;
+}
+
+.boton-editar {
+  padding-right: 6px;
+}
+
+.min-width-55 {
+  min-width: 55px;
+}
+
+.min-width-120 {
+  min-width: 120px;
+}
