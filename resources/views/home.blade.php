@@ -5,35 +5,33 @@
     <div class="row justify-content-center">
 
         <h2>Trabajos con entrega próxima</h2>
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-                </tr>
-                <tr>
-                <td>1,002</td>
-                <td>amet</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
-                <td>elit</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small>3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small>Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">List group item heading</h5>
+                <small class="text-muted">3 days ago</small>
+                </div>
+                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                <small class="text-muted">Donec id elit non mi porta.</small>
+            </a>
+        </div>
+        
     </div>
 </div>
 @endsection

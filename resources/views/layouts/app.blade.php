@@ -24,7 +24,7 @@
 
 </head>
 
-<body id="app" class="container-fluid">
+<body id="app" class="container-fluid px-0">
 
     @auth
         <!-- BARRRA DE NAVEGACIÓN -->
@@ -44,21 +44,17 @@
     @endauth
 
     <div class="row">
-
-        @auth
             <!-- SIDEBAR IZQUIERDA -->
-            @include('componentes/aside')
-        @endauth        
+            @auth
+                <aside class="col-md-4 col-lg-3 d-none d-md-block sidebar bd-sidebar">
+                    @include('componentes/aside')
+                </aside>
+            @endauth     
 
-        <!-- CONTENIDO PRINCIPAL -->
-        @guest
-         <main class="col-12">
-        @else
-         <main class="col-sm-12 col-md-7 py-4">
-        @endguest
-            @yield('content')
-         </main>
-
+            <!-- CONTENIDO PRINCIPAL -->
+            <main class="@guest col-12 @else col-sm-12 col-md-8 col-lg-6 @endguest"> 
+                @yield('content')
+            </main>
     </div>
 
 </body>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Albaranes;
 
 use App\Albaran;
 use App\Cliente;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\UsuarioLaboratorio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -100,6 +101,8 @@ class AlbaranesController extends Controller
 
     public function imprimirAlbaran(Albaran $albaran)
     {
-        return 'Imprimir jeje';
+        $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
+        // return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
+        return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
     }
 }

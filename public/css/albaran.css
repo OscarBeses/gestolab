@@ -1,0 +1,41 @@
+body { 
+  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
+}
+
+#header {
+  color: darkgreen;
+}
+
+.absolute{
+  position: absolute;
+}
+#titulo{
+  height: 20;
+  border-top: .5px black solid;
+  border-bottom: .5px black solid;
+}
+#titulo > .top-left {
+  top: 4px;
+  left: 0px;
+  width: 45%;
+}
+#titulo > .top-right {
+  top: 4px;
+  right: 0px;
+  width: 45%;
+}
+
+#lab-cli{
+  height: 200px;
+}
+#lab-cli > .top-left {
+  top: 75px;
+  left: 0px;
+  width: 45%;
+}
+#lab-cli > .top-right {
+  top: 75px;
+  right: 0px;
+  width: 45%;
+}

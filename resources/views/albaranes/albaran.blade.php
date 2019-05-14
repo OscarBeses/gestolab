@@ -22,14 +22,14 @@
                     @method('put') @endisset @csrf
                     <div class="form-row">
                         @isset($albaran->alb_numero)
-                        <div class="form-group col-lg-3 col-xl-2">
-                            <label>Nº de albarán</label>
+                        <div class="form-group col-md-3 col-lg-3 col-xl-2">
+                            <label class="min-width-120">Nº de albarán</label>
                             <input type="text" class="form-control" name="alb_numero" value="{{ $albaran->alb_numero }}" readonly>
                         </div>
                         @endisset
-                        <div class="form-group col-md-12 col-lg-9 col-xl-10 input-ancho">
+                        <div class="form-group col-md-12 col-lg-9 col-xl-10">
                             <label>Laboratorio</label>
-                            <label class="form-control overflow-auto">{{ $albaran->laboratorio }}</label>
+                            <label class="form-control overflow-auto input-ancho">{{ $albaran->laboratorio }}</label>
                             <input type="hidden" name="lab_id" value="{{ $albaran->laboratorio->lab_id }}"> 
                             {{-- Mientras solo haya un laboratorio lo dejaré así
                             <select class="custom-select mr-2" name="lab_id" readonly>
@@ -77,7 +77,7 @@
     </div>
     <!-- APARTADO DE LOS TRABAJOS DEL ALBARÁN -->
     @isset($albaran->alb_id)
-        <div class="row border rounded pt-2 mt-2">
+        <div class="row border rounded pt-2 my-2">
             <div class="col-12">
                 <p class="text-center">Trabajos:</p>
                 <div class="mb-2">
@@ -139,8 +139,12 @@
     @endisset
     <div class="row">
         <div class="col-12">
-            <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}">Imprimir Albarán</a>
-            <a class="btn mx-2 btn-secondary float-right" href="{{ url('/albaranes') }}">Atrás</a>
+            <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}" target="_blank">
+                Imprimir Albarán
+            </a>
+            <a class="btn mx-2 btn-secondary float-right" href="{{ url('/albaranes') }}">
+                Atrás
+            </a>
         </div>
     </div>
     

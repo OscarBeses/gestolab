@@ -29,11 +29,11 @@
   .hide-md {
     display: none;
   }
+}
+@include media-breakpoint-down(lg) {
   .input-ancho {
     height: 75px;
   }
-}
-@include media-breakpoint-down(lg) {
 }
 
 html,
@@ -42,8 +42,9 @@ body {
   color: #636b6f;
   font-family: "Nunito", sans-serif;
   font-weight: 200;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .links > a,
@@ -105,4 +106,20 @@ body {
 
 .min-width-120 {
   min-width: 120px;
+}
+
+// Aquí aplico un width a los iconos que acompañan a los items del menú
+a.nav-link > svg{
+  min-width: 50px;
+}
+
+/* Centra los items del menú dentro del aside */
+.items-aside{
+  width: 245px;
+  margin: auto;
+}
+
+// Le doy a todos mis titulos de páginas el estilo de margen/eje y/3
+h2{
+  @extend .my-3;
 }
