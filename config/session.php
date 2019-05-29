@@ -31,7 +31,8 @@ return [
     |
     */
 
-    'lifetime' => env('SESSION_LIFETIME', 120),
+    // Aumento el tiempo de vida de la sesión a 4 horas (4hx60m=240m)
+    'lifetime' => env('SESSION_LIFETIME', 240),
 
     'expire_on_close' => false,
 
