@@ -31,3 +31,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app'
 });
+
+/**
+ * Tras emitir ocultamos los botones de guardar albaran, añadir trabajo y modificar o borrar trabajos
+ */
+function trasEmitir() {
+    $("#divGuardar").remove();
+    $("#divNuevoTrabajo").remove();
+    $(".tdBtnEditarBorrar").remove();
+}

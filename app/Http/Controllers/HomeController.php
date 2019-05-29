@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Albaran;
+
 class HomeController extends Controller
 {
     /**
@@ -17,6 +19,9 @@ class HomeController extends Controller
      */
     public function mostrarHome()
     {
-        return view('home');
+        $albaranes = Albaran::whereNotNull('alb_fecha_entrega')->whereNull('fac_id')
+                        ->orderBy('alb_fecha_entrega', 'asc')
+                        ->get();
+        return view('home', compact('albaranes'));
     }
 }

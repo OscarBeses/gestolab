@@ -22,13 +22,11 @@ class ProductosController extends Controller
 
     /**
      * Muestra la ventana de productos
-     * Con el listado de productos
+     * Con el listado de productos paginado
      */
     public function mostrarProductos()
     {
-        // $productos = DB::table('producto')->get();
         $productos = Producto::orderBy('prd_id', 'desc')->paginate(3);
-
         return view('productos.productos', compact('productos'));
     }
 
@@ -54,7 +52,7 @@ class ProductosController extends Controller
     {
             $request->validate([
                 'prd_descripcion' => 'required',
-                'prd_importe' => 'required',
+                'prd_importe' => 'required|numeric',
                 'prd_observaciones' => 'nullable'
             ]);
     

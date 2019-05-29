@@ -51,8 +51,8 @@ class TrabajosController extends Controller
     {
         $request->validate([
             'tra_observaciones' => 'nullable', 
-            'tra_cantidad' => 'required',
-            'tra_precio_unidad' => 'required',
+            'tra_cantidad' => 'required|min:0',
+            'tra_precio_unidad' => 'required|numeric|min:0',
             'prd_id' => 'required',
             'alb_id' => 'required'
         ]);
@@ -67,8 +67,8 @@ class TrabajosController extends Controller
     {
         $request->validate([
             'tra_observaciones' => 'nullable', 
-            'tra_cantidad' => 'required',
-            'tra_precio_unidad' => 'required',
+            'tra_cantidad' => 'required|min:0',
+            'tra_precio_unidad' => 'required|numeric|min:0',
             'prd_id' => 'required',
             'alb_id' => 'required'
         ]);

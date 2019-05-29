@@ -5,32 +5,24 @@
     <div class="row justify-content-center">
 
         <h2>Trabajos con entrega próxima</h2>
-        <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small>3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small>Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">List group item heading</h5>
-                <small class="text-muted">3 days ago</small>
-                </div>
-                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                <small class="text-muted">Donec id elit non mi porta.</small>
-            </a>
-        </div>
+        <ul class="col-12 list-group my-3">
+            @forelse ($albaranes as $albaran)
+                <li class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ $albaran->alb_numero . ' - ' . $albaran->cliente->cli_nombre_corto }}</h5>
+                        <small>{{ $albaran->dameTotal() . ' €' }}</small>
+                    </div>
+                    <p class="mb-1">{{ $albaran->getCadenaTrabajos() }}</p>
+                    <div class="row">
+                        <p class="col mt-12 text-center font-weight-bold">
+                            Fecha de entrega el día: {{ $albaran->alb_fecha_entrega->format('d/m/Y') }}
+                        </p>
+                    </div>
+                </li>
+            @empty
+                <p class="text-center">¡Que bien! No hay albaranes sin facturar con fecha de entrega próxima</p>
+            @endforelse
+        </ul>
         
     </div>
 </div>

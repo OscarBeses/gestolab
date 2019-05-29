@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 
 class AlbaranesController extends Controller
 {
@@ -31,7 +32,7 @@ class AlbaranesController extends Controller
     public function mostrarAlbaranes()
     {
         // $albaranes = DB::table('albaran')->get();
-        $albaranes = Albaran::all();
+        $albaranes = Albaran::paginate(3);
 
         return view('albaranes.albaranes', compact('albaranes'));
     }
@@ -99,10 +100,21 @@ class AlbaranesController extends Controller
         return redirect('/albaranes');
     }
 
+    /**
+     * Emitir albarán
+     */
     public function imprimirAlbaran(Albaran $albaran)
     {
+        if(!isset($albaran->alb_fecha_emision)) {
+            // Si no se ha emitido se emite.
+            $albaran->alb_fecha_emision = Carbon::now();
+            $albaran->save();
+        }
+
         $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
-        // return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
+        // ESTO LO DESCARGA:
+        //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
+        // Y ESTO LO SACA EN OTRA PESTAÑA
         return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
     }
 }

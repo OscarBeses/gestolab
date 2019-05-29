@@ -27,10 +27,10 @@
 <body id="app" class="container-fluid px-0">
 
     @auth
-        <!-- BARRRA DE NAVEGACIÓN -->
+        <!-- BARRRA DE NAVEGACIÓN (si se ha hecho login) -->
         @include('componentes/nav')
     @else
-        <!-- BOTONES SUPERIORES DE LOGIN, ETC -->
+        <!-- BOTONES SUPERIORES DE LOGIN, ETC (si no se ha hecho login) -->
         <div class="row top-right links">
             @if (Request::is('login*'))
                 <a href="{{ route('welcome') }}">Página principal</a>

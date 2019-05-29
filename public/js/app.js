@@ -49279,6 +49279,15 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
+/**
+ * Tras emitir ocultamos los botones de guardar albaran, añadir trabajo y modificar o borrar trabajos
+ */
+
+function trasEmitir() {
+  $("#divGuardar").remove();
+  $("#divNuevoTrabajo").remove();
+  $(".tdBtnEditarBorrar").remove();
+}
 
 /***/ }),
 
@@ -49427,8 +49436,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Gestolab\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Gestolab\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\gestolab\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\gestolab\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -6,20 +6,12 @@ use gestolab;
 */
  
 /*
-DELETE USER IF EXISTS 'oski_bc'; 
+DROP USER IF EXISTS 'oski_bc'; 
 CREATE USER 'oski_bc'@'localhost';
-SET PASSWORD FOR 'oski_bc'@'localhost' = PASSWORD('Naci0ne$');
+SET PASSWORD FOR 'oski_bc'@'localhost' = PASSWORD('PASWORD_AQUI');
 GRANT ALL PRIVILEGES ON gestolab.* TO 'oski_bc'@'localhost';
 */
 
-/* ESTA SE HACE MEDIANTE MIGRACIONES 
-create table usuario (
-	usu_id bigint(20) unsigned auto_increment,
-    usu_nombre varchar(20),
-    usu_contrasenya_hash varchar(255),
-    primary key (usu_id)
-);
-*/
 
 create table producto (
 	prd_id bigint(20) unsigned auto_increment,

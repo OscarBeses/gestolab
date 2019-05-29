@@ -41,6 +41,7 @@
             <li>No hay albaranes registrados</li>
         @endforelse
     </ul>
+    {{ $albaranes->links() }}
 
 </div>
 @endsection

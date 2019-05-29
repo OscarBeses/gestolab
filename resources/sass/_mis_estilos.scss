@@ -5,6 +5,9 @@
 @include media-breakpoint-up(md) {
 }
 @include media-breakpoint-up(lg) {
+  .input-ancho {
+    height: 60px;
+  }
 }
 @include media-breakpoint-up(xl) {
 }
@@ -29,11 +32,12 @@
   .hide-md {
     display: none;
   }
+  .input-ancho {
+    height: 80px;
+  }
 }
 @include media-breakpoint-down(lg) {
-  .input-ancho {
-    height: 75px;
-  }
+  
 }
 
 html,
@@ -101,7 +105,7 @@ body {
 }
 
 .min-width-55 {
-  min-width: 55px;
+  min-width: 75px;
 }
 
 .min-width-120 {

@@ -8226,7 +8226,8 @@ button.bg-dark:focus {
 }
 
 .mt-3,
-.my-3 {
+.my-3,
+h2 {
   margin-top: 1rem !important;
 }
 
@@ -8236,7 +8237,8 @@ button.bg-dark:focus {
 }
 
 .mb-3,
-.my-3 {
+.my-3,
+h2 {
   margin-bottom: 1rem !important;
 }
 
@@ -10662,13 +10664,19 @@ a.text-dark:focus {
   }
 }
 
+@media (min-width: 992px) {
+  .input-ancho {
+    height: 60px;
+  }
+}
+
 @media (max-width: 991.98px) {
   .hide-md {
     display: none;
   }
 
   .input-ancho {
-    height: 75px;
+    height: 80px;
   }
 }
 
@@ -10678,8 +10686,9 @@ body {
   color: #636b6f;
   font-family: "Nunito", sans-serif;
   font-weight: 200;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
 }
 
 .links > a,
@@ -10736,10 +10745,21 @@ body {
 }
 
 .min-width-55 {
-  min-width: 55px;
+  min-width: 75px;
 }
 
 .min-width-120 {
   min-width: 120px;
+}
+
+a.nav-link > svg {
+  min-width: 50px;
+}
+
+/* Centra los items del menú dentro del aside */
+
+.items-aside {
+  width: 245px;
+  margin: auto;
 }
 

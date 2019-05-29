@@ -53,8 +53,6 @@
                         </div>
                     </div>
                     
-                    <div class="dropdown-divider mt-4"></div>
-                    
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="font-weight-bold">
@@ -66,11 +64,13 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <form>
-                            <input class="btn btn-primary float-right" type="submit" value="Guardar">
-                        </form>
-                    </div>
+                    @if(!isset($albaran->alb_fecha_emision))
+                        <div class="form-group" id="divGuardar">
+                            <form>
+                                <input class="btn btn-primary float-right" type="submit" value="Guardar">
+                            </form>
+                        </div>
+                    @endif
 
                 </form>
         </div>
@@ -80,14 +80,16 @@
         <div class="row border rounded pt-2 my-2">
             <div class="col-12">
                 <p class="text-center">Trabajos:</p>
-                <div class="mb-2">
-                    <form action="{{ route('trabajo.nuevo', $albaran->alb_id) }}" method="GET">
-                        @csrf
-                        <button type="submit" class="btn btn-info btn-sm">
-                            <i class="fas fa-plus-circle"></i><span> Añadir trabajo</span>
-                        </button>
-                    </form>
-                </div>
+                @if(!isset($albaran->alb_fecha_emision))
+                    <div class="mb-2" id="divNuevoTrabajo">
+                        <form action="{{ route('trabajo.nuevo', $albaran->alb_id) }}" method="GET">
+                            @csrf
+                            <button type="submit" class="btn btn-info btn-sm">
+                                <i class="fas fa-plus-circle"></i><span> Añadir trabajo</span>
+                            </button>
+                        </form>
+                    </div>
+                @endif
                 @include('componentes/mensajeConfirmacion')
                 <table class="table table-sm">
                     <thead class="thead-light">
@@ -110,16 +112,18 @@
                                         <td class="col">{{$trabajo->producto->prd_descripcion}}</td>
                                         <td class="col-2 min-width-120 text-right hide-md">{{$trabajo->tra_precio_unidad}} €</td>
                                         <td class="col-2 min-width-55 text-right">{{$trabajo->tra_precio_unidad * $trabajo->tra_cantidad}} €</td>
-                                        <td class="col-2">
+                                        @if(!isset($albaran->alb_fecha_emision))
+                                        <td class="col-2 tdBtnEditarBorrar">
                                             <div class="btn-group">
                                                 <a class="btn btn-primary btn-sm" href="{{ route('trabajo', $trabajo->tra_id) }}">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Quiere borrar el trabajo?')">
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que desea borrar el trabajo?')">
                                                     <i class="far fa-trash-alt"></i>
                                                 </button>
                                             </div>
                                         </td>
+                                        @endif
                                     </div>
                                 </tr>
                             </form>
@@ -136,17 +140,23 @@
                 </table>
             </div>
         </div>
-    @endisset
-    <div class="row">
-        <div class="col-12">
-            <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}" target="_blank">
-                Imprimir Albarán
-            </a>
-            <a class="btn mx-2 btn-secondary float-right" href="{{ url('/albaranes') }}">
-                Atrás
-            </a>
+        <!-- BOTON IMPRIMIR Y ATRÁS -->
+        <div class="row">
+            <div class="col-12">
+                <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}" target="_blank"
+                    onclick="trasEmitir()">
+                    @isset($albaran->alb_fecha_emision)
+                        Imprimir Albarán
+                    @else
+                        Emitir Albarán
+                    @endif
+                </a>
+                <a class="btn mx-2 btn-secondary float-right" href="{{ url('/albaranes') }}">
+                    Atrás
+                </a>
+            </div>
         </div>
-    </div>
+    @endisset
     
 </div>
 @endsection
