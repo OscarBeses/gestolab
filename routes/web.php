@@ -64,6 +64,7 @@ Route::get('/productos/nuevo', 'Productos\ProductosController@mostrarProductoNue
 Route::put('/productos/nuevo', 'Productos\ProductosController@guardarProducto')->name('producto.guardar');// Guarda el nuevo producto
 Route::get('/productos/{producto}', 'Productos\ProductosController@mostrarProducto')->name('producto');// Muestra el detalle del producto
 Route::post('/productos/{producto}/editar', 'Productos\ProductosController@editarProducto')->name('producto.editar');// Edita el producto
+Route::post('/productos/{producto}/eliminar', 'Productos\ProductosController@eliminarProducto')->name('producto.eliminar');
 
 // Ruta para albaranes y albaranes/prod_id
 Route::get('/albaranes', 'Albaranes\AlbaranesController@mostrarAlbaranes')->name('albaranes');// Muestra los albaranes

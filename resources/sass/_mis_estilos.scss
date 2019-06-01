@@ -1,8 +1,12 @@
+/*_________________________UP_____________________________*/
 @include media-breakpoint-up(xs) {
 }
 @include media-breakpoint-up(sm) {
 }
 @include media-breakpoint-up(md) {
+  .solo-movil{
+    display: none !important;
+  }
 }
 @include media-breakpoint-up(lg) {
   .input-ancho {
@@ -12,6 +16,7 @@
 @include media-breakpoint-up(xl) {
 }
 
+/*_________________________ONLY_____________________________*/
 @include media-breakpoint-only(xs) {
 }
 @include media-breakpoint-only(sm) {
@@ -23,21 +28,23 @@
 @include media-breakpoint-only(xl) {
 }
 
+/*_________________________DOWN_____________________________*/
 @include media-breakpoint-down(xs) {
 }
 @include media-breakpoint-down(sm) {
-  
+  .oculto-en-movil{
+    display: none;
+  }
 }
 @include media-breakpoint-down(md) {
-  .hide-md {
+  .oculto-en-phablet{
     display: none;
   }
   .input-ancho {
     height: 80px;
   }
 }
-@include media-breakpoint-down(lg) {
-  
+@include media-breakpoint-down(lg) {  
 }
 
 html,
@@ -126,4 +133,22 @@ a.nav-link > svg{
 // Le doy a todos mis titulos de páginas el estilo de margen/eje y/3
 h2{
   @extend .my-3;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  > div.solo-movil {
+    width: 99%;
+    @extend .navbar-nav;
+  }
+}
+
+.item-usuario{
+  width: 160px;
+  > a {
+    text-align: right;
+    padding-right: 5px;
+  }
 }

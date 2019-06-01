@@ -94,9 +94,9 @@
                 <table class="table table-sm">
                     <thead class="thead-light">
                         <tr>
-                            <th class="col-2 min-width-55 hide-md">Cantidad</th>
+                            <th class="col-2 min-width-55 oculto-en-phablet">Cantidad</th>
                             <th class="col">Descripción producto</th>
-                            <th class="col-2 min-width-120 text-right hide-md">Precio / Unidad</th>
+                            <th class="col-2 min-width-120 text-right oculto-en-phablet">Precio / Unidad</th>
                             <th class="col-2 min-width-55 text-right">Total</th>
                             <th class="col-2 "></th>
                         </tr>
@@ -108,9 +108,9 @@
                                 @csrf
                                 <tr class="mt-0">
                                     <div class="row">
-                                        <td class="col-2 min-width-55 hide-md">{{$trabajo->tra_cantidad}}</td>
+                                        <td class="col-2 min-width-55 oculto-en-phablet">{{$trabajo->tra_cantidad}}</td>
                                         <td class="col">{{$trabajo->producto->prd_descripcion}}</td>
-                                        <td class="col-2 min-width-120 text-right hide-md">{{$trabajo->tra_precio_unidad}} €</td>
+                                        <td class="col-2 min-width-120 text-right oculto-en-phablet">{{$trabajo->tra_precio_unidad}} €</td>
                                         <td class="col-2 min-width-55 text-right">{{$trabajo->tra_precio_unidad * $trabajo->tra_cantidad}} €</td>
                                         @if(!isset($albaran->alb_fecha_emision))
                                         <td class="col-2 tdBtnEditarBorrar">

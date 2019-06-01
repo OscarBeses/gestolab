@@ -23,6 +23,7 @@
                 <p class="text-center">¡Que bien! No hay albaranes sin facturar con fecha de entrega próxima</p>
             @endforelse
         </ul>
+        {{ $albaranes->links() }}
         
     </div>
 </div>

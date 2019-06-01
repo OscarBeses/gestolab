@@ -21,7 +21,7 @@ class HomeController extends Controller
     {
         $albaranes = Albaran::whereNotNull('alb_fecha_entrega')->whereNull('fac_id')
                         ->orderBy('alb_fecha_entrega', 'asc')
-                        ->get();
+                        ->paginate(3);
         return view('home', compact('albaranes'));
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Productos;
 
+use App\Trabajo;
 use App\Producto;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class ProductosController extends Controller
@@ -26,7 +27,7 @@ class ProductosController extends Controller
      */
     public function mostrarProductos()
     {
-        $productos = Producto::orderBy('prd_id', 'desc')->paginate(3);
+        $productos = Producto::where('prd_borrado', 'N')->orderBy('prd_id', 'desc')->paginate(3);
         return view('productos.productos', compact('productos'));
     }
 
@@ -73,6 +74,26 @@ class ProductosController extends Controller
         $producto->update($request->all());
 
         Session::flash('confirmacion','Se ha editado correctamente');
+        return redirect('/productos');
+    }
+
+    /**
+     * Se mira si existe en algún TrabajoDetalle que tenga el producto
+     * - Si nadie lo usa, se borra.
+     * - Si alguien lo usa, se marca como borrado pero no se borra.
+     */
+    public function eliminarProducto(Producto $producto){
+        $idProducto = $producto->prd_id;
+        
+        $cantUsosProd = Trabajo::where('prd_id', $idProducto)->count();
+        if($cantUsosProd == 0)
+            $producto->delete();
+        else {
+            $producto->prd_borrado = 'S';
+            $producto->save();
+        }
+
+        Session::flash('confirmacion','El producto ha sido eliminado correctamente');
         return redirect('/productos');
     }
 
