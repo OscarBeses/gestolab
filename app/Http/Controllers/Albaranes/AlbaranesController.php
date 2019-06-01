@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Albaranes;
 use App\Albaran;
 use App\Cliente;
 
+use Barryvdh\DomPDF\Facade as PDF;
 use App\UsuarioLaboratorio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -111,11 +112,14 @@ class AlbaranesController extends Controller
             $albaran->save();
         }
         
-        $pdf = Barryvdh\DomPDF\PDF::loadView('albaranes.pdf', compact('albaran'));
-        echo ('3');
-        // ESTO LO DESCARGA:
-        //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
-        // Y ESTO LO SACA EN OTRA PESTAÑA
-        return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
+        // $pdf = Barryvdh\DomPDF\PDF::loadView('albaranes.pdf', compact('albaran'));
+        // echo ('3');
+        // // ESTO LO DESCARGA:
+        // //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
+        // // Y ESTO LO SACA EN OTRA PESTAÑA
+        // return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
+
+        $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
+        return $pdf->download('invoice.pdf');
     }
 }
