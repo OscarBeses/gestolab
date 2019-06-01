@@ -104,22 +104,16 @@ class AlbaranesController extends Controller
      */
     public function imprimirAlbaran(Albaran $albaran)
     {
-        echo ('1' . $albaran);
         if(!isset($albaran->alb_fecha_emision)) {
-            echo ('2');
             // Si no se ha emitido se emite.
             $albaran->alb_fecha_emision = Carbon::now();
             $albaran->save();
         }
         
-        // $pdf = Barryvdh\DomPDF\PDF::loadView('albaranes.pdf', compact('albaran'));
-        // echo ('3');
+        $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));        
         // // ESTO LO DESCARGA:
         // //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
         // // Y ESTO LO SACA EN OTRA PESTAÑA
-        // return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
-
-        $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
     }
 }
