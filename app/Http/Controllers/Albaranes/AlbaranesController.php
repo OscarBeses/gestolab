@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Albaranes;
 
 use App\Albaran;
 use App\Cliente;
-use Barryvdh\DomPDF\Facade as PDF;
+
+use PDF;
 use App\UsuarioLaboratorio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Carbon;
 
 class AlbaranesController extends Controller
 {
@@ -103,13 +104,16 @@ class AlbaranesController extends Controller
      */
     public function imprimirAlbaran(Albaran $albaran)
     {
+        echo ('1' . $albaran);
         if(!isset($albaran->alb_fecha_emision)) {
+            echo ('2');
             // Si no se ha emitido se emite.
             $albaran->alb_fecha_emision = Carbon::now();
             $albaran->save();
         }
-
+        
         $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
+        echo ('3' . $pdf);
         // ESTO LO DESCARGA:
         //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
         // Y ESTO LO SACA EN OTRA PESTAÑA
