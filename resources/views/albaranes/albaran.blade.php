@@ -144,7 +144,7 @@
         <!-- BOTON IMPRIMIR Y ATRÁS -->
         <div class="row">
             <div class="col-12">
-                <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}" target="_blank"
+                <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}"
                     onclick="trasEmitir()">
                     @isset($albaran->alb_fecha_emision)
                         Imprimir Albarán

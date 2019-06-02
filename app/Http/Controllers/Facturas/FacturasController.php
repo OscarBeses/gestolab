@@ -47,8 +47,14 @@ class FacturasController extends Controller
      */
     public function generarFacturaNueva(Request $request)
     {
+        // $request->validate([
+        //     'cli_id' => 'required',
+        // ]);
+
         // Cojo el cliente seleccionado
-        $clienteId = $request->session()->get('cliente');
+        // $clienteId = $request->get('cliente');
+        $clienteId = $request->input("cli_id");
+
         // Se cojen los albaranes que agrupa la factura (albaranes del cliente pasado y que tengan fecha de emision pero no fac_id)
         $albaranes = Albaran::whereNotNull('alb_fecha_emision')
                         ->whereNull('fac_id')
@@ -56,6 +62,8 @@ class FacturasController extends Controller
                         ->where('cli_id', $clienteId)
                         ->orderBy('alb_id', 'desc')
                         ->get();
+
+        // SI NO HAY ALBARANES EMITIDOS NO DEBERÍA DEJAR HACER UNA FACTURA (sesion flash aqui y return)
 
         $proxNumFactura = DB::table('albaran')->max('alb_numero') + 1;
         if($proxNumFactura == null)
@@ -74,7 +82,7 @@ class FacturasController extends Controller
         }
 
         Session::flash('confirmacion','Se ha creado la nueva factura ' . $proxNumFactura);
-        return redirect('/facturas');
+        return $this->mostrarFacturas();
     }
 
     /**

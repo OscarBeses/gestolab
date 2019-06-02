@@ -42,7 +42,7 @@ $(document).ready(function(){
         var idProducto = e.target.value;
         
         // AJAX
-        $.get('/albaranes/ajax-damePrecioProd?prod_id='+idProducto, function(data){
+        $.get('/ajax-damePrecioProd?'+idProducto, function(data){
             var importeProd = data[0].prd_importe
             $("input#imp").val(importeProd);
         });

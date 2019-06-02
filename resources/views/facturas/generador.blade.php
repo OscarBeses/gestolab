@@ -14,8 +14,8 @@
         <div class="col-12">
 
             <form class="form-group" action="{{ route('factura.generar') }}" method="POST">
-                @method('put')  @csrf
-                
+                @method('put')
+                @csrf
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="cliente">Cliente para el que se realiza la factura:</label>
@@ -29,9 +29,9 @@
                 
                 <div class="form-group">
                     <div class="col-12">
-                        <a class="btn mx-2 btn-warning float-right" href="{{ route('factura.generar') }}" target="_blank">
+                        <button type="submit" class="btn mx-2 btn-warning float-right">
                             Generar Factura
-                        </a>
+                        </button>
                         <a class="btn mx-2 btn-secondary float-right" href="{{ url('/facturas') }}">
                             Atrás
                         </a>

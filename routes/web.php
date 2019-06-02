@@ -71,7 +71,7 @@ Route::post('/productos/{producto}/eliminar', 'Productos\ProductosController@eli
 Route::get('/albaranes', 'Albaranes\AlbaranesController@mostrarAlbaranes')->name('albaranes');// Muestra los albaranes
 Route::get('/albaranes/nuevo', 'Albaranes\AlbaranesController@mostrarAlbaranNuevo');// Muestra la vista para crear uno nuevo
 Route::put('/albaranes/nuevo', 'Albaranes\AlbaranesController@guardarAlbaran')->name('albaran.guardar');// Guarda el nuevo albaran
-Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');// Muestra el detalle del albaran
+Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->where('albaran', '[0-9]+')->name('albaran');// Muestra el detalle del albaran
 Route::post('/albaranes/{albaran}/editar', 'Albaranes\AlbaranesController@editarAlbaran')->name('albaran.editar');// Edita el albaran
 Route::get('/albaranes/{albaran}/imprimir', 'Albaranes\AlbaranesController@imprimirAlbaran')->name('albaran.imprimir');// Imprime el albaran
 Route::post('/albaranes/{albaran}/eliminar', 'Albaranes\AlbaranesController@eliminarAlbaran')->name('albaran.eliminar');

@@ -47,7 +47,7 @@ class TrabajosController extends Controller
         $trabajo->tra_cantidad = 1;
         $trabajo->alb_id = $albaran->alb_id;
 
-        $productos = Producto::all();
+        $productos = Producto::where('prd_borrado', 'N')->get();
         return view('albaranes.trabajo', compact('trabajo', 'productos'));
     }
 
