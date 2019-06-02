@@ -120,8 +120,11 @@ body {
 }
 
 // Aquí aplico un width a los iconos que acompañan a los items del menú
-a.nav-link > svg{
-  min-width: 50px;
+a.nav-link {
+  width: 160px;
+  > svg{
+    min-width: 50px;
+  }
 }
 
 /* Centra los items del menú dentro del aside */
@@ -140,15 +143,11 @@ h2{
   flex-wrap: wrap;
   justify-content: space-around;
   > div.solo-movil {
-    width: 99%;
     @extend .navbar-nav;
+    justify-content: space-evenly;
   }
 }
 
 .item-usuario{
   width: 160px;
-  > a {
-    text-align: right;
-    padding-right: 5px;
-  }
 }

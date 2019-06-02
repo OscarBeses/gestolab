@@ -31,7 +31,18 @@ class Factura extends Model
     public $timestamps = false;
 
     public function albaranes() {
-        $this->hasMany(Albaran::class, 'fac_id');
+        return $this->hasMany(Albaran::class, 'fac_id');
+    }
+
+    /**
+     * Devuelve la suma de los importes de todos los albaranes
+     */
+    public function dameTotal() {
+        $total = 0;
+        foreach ($this->albaranes as $albaran) {
+            $total += $albaran->dameTotal();
+        }
+        return $total;
     }
 
     public function __toString() {

@@ -79,3 +79,9 @@ Route::put('/albaranes/trabajos/nuevo', 'Trabajos\TrabajosController@guardarTrab
 Route::get('/albaranes/trabajos/{trabajo}', 'Trabajos\TrabajosController@mostrarTrabajo')->name('trabajo');
 Route::post('/albaranes/trabajos/{trabajo}/editar', 'Trabajos\TrabajosController@editarTrabajo')->name('trabajo.editar');
 Route::post('/albaranes/trabajos/{trabajo}/eliminar', 'Trabajos\TrabajosController@eliminarTrabajo')->name('trabajo.eliminar');
+
+// Ruta para facturas
+Route::get('/facturas', 'Facturas\FacturasController@mostrarFacturas')->name('facturas');
+Route::get('/facturas/nueva', 'Facturas\FacturasController@mostrarGeneradorFacturas')->name('generador');
+Route::put('/facturas/generar', 'Facturas\FacturasController@generarFacturaNueva')->name('generar');
+Route::get('/facturas/{factura}/imprimir', 'Facturas\FacturasController@imprimirFactura')->name('albaran.imprimir');

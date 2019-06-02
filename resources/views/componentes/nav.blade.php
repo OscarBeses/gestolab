@@ -36,7 +36,7 @@
                         @include('componentes/items-menu')
                         @include('componentes/item-usuario')
                     </div>
-                    <div class="oculto-en-phablet">
+                    <div class="oculto-en-movil">
                         @include('componentes/item-usuario')
                     </div>
                 @endguest

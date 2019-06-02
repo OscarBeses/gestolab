@@ -1,6 +1,6 @@
 <li class="nav-item dropdown">
     <a class="nav-link " href="{{ url('/home') }}">
-        <i class="fas fa-home fa-2x"></i> Página principal
+        <i class="fas fa-home fa-2x"></i> Principal
     </a>
 </li>
 <li class="nav-item dropdown">
@@ -19,7 +19,7 @@
     </a>
 </li>
 <li class="nav-item dropdown">
-    <a class="nav-link" href="#">{{-- {{ route('facturas') }} --}}
-            <i class="fas fa-file-invoice  fa-2x"></i> Facturas
+    <a class="nav-link" href="{{ route('facturas') }}">
+        <i class="fas fa-file-invoice fa-2x"></i> Facturas
     </a>
 </li>
