@@ -23,7 +23,7 @@
         @csrf
         <div class="form-row">
             <input type="hidden" value="{{ $trabajo->albaran->alb_id }}" name="alb_id">
-            <div class="form-group col-sm-12 col-md-3">
+            <div class="form-group col-sm-12 col-md-2">
                 <label for="cant">Cantidad</label>
                 <input type="number" class="form-control" id="cant" placeholder="Cantidad" name="tra_cantidad" 
                     value="{{ Helper::getDatoAnterior($trabajo, 'tra_cantidad') }}">
@@ -36,14 +36,14 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-group col-sm-12 col-md-2">
+            <div class="form-group col-sm-12 col-md-3">
                 <label for="imp">Precio unidad</label>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Importe" aria-describedby="euro-span"
+                    <input type="number" class="form-control" placeholder="Importe" aria-describedby="euro-span" min="0.00" max="10000.00" step="0.01" 
                         value="{{ Helper::getDatoAnterior($trabajo, 'tra_precio_unidad') }}" id="imp" name="tra_precio_unidad" >
                     <div class="input-group-append"> <span class="input-group-text" id="euro-span">€</span> </div>
                 </div>
-            </div>           
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-12 input-ancho">

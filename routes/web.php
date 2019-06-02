@@ -1,5 +1,9 @@
 <?php
 
+use App\Producto;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+
 /*
 |--------------------------------------------------------------------------
 | Rutas Web
@@ -73,15 +77,21 @@ Route::put('/albaranes/nuevo', 'Albaranes\AlbaranesController@guardarAlbaran')->
 Route::get('/albaranes/{albaran}', 'Albaranes\AlbaranesController@mostrarAlbaran')->name('albaran');// Muestra el detalle del albaran
 Route::post('/albaranes/{albaran}/editar', 'Albaranes\AlbaranesController@editarAlbaran')->name('albaran.editar');// Edita el albaran
 Route::get('/albaranes/{albaran}/imprimir', 'Albaranes\AlbaranesController@imprimirAlbaran')->name('albaran.imprimir');// Imprime el albaran
+Route::post('/albaranes/{albaran}/eliminar', 'Albaranes\AlbaranesController@eliminarAlbaran')->name('albaran.eliminar');
 //Ruta trabajos del albarán
 Route::get('/albaranes/{albaran}/trabajos/nuevo', 'Trabajos\TrabajosController@mostrarTrabajoNuevo')->name('trabajo.nuevo');// Muestra la vista para crear uno nuevo
 Route::put('/albaranes/trabajos/nuevo', 'Trabajos\TrabajosController@guardarTrabajo')->name('trabajo.guardar');// Guarda el nuevo trabajo
 Route::get('/albaranes/trabajos/{trabajo}', 'Trabajos\TrabajosController@mostrarTrabajo')->name('trabajo');
 Route::post('/albaranes/trabajos/{trabajo}/editar', 'Trabajos\TrabajosController@editarTrabajo')->name('trabajo.editar');
 Route::post('/albaranes/trabajos/{trabajo}/eliminar', 'Trabajos\TrabajosController@eliminarTrabajo')->name('trabajo.eliminar');
+Route::get('/ajax-damePrecioProd', function(){
+    $prod_id = Input::get('prod_id');
+    $producto = Producto::where('prd_id', $prod_id)->get();
+    return Response::json($producto);
+});
 
 // Ruta para facturas
 Route::get('/facturas', 'Facturas\FacturasController@mostrarFacturas')->name('facturas');
 Route::get('/facturas/nueva', 'Facturas\FacturasController@mostrarGeneradorFacturas')->name('generador');
 Route::put('/facturas/generar', 'Facturas\FacturasController@generarFacturaNueva')->name('generar');
-Route::get('/facturas/{factura}/imprimir', 'Facturas\FacturasController@imprimirFactura')->name('albaran.imprimir');
+Route::get('/facturas/{factura}/imprimir', 'Facturas\FacturasController@imprimirFactura')->name('factura.imprimir');

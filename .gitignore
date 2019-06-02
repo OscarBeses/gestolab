@@ -15,3 +15,5 @@ yarn-error.log
 .vscode
 claveAWS.pem
 id_rsa.pem
+public/css/app.css
+public/js/app.js

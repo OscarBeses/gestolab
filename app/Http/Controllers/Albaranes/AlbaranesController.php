@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Albaranes;
 
 use App\Albaran;
 use App\Cliente;
-
-use Barryvdh\DomPDF\Facade as PDF;
+use App\Trabajo;
 use App\UsuarioLaboratorio;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Http\Controllers\Controller;
 
 class AlbaranesController extends Controller
 {
@@ -53,6 +57,10 @@ class AlbaranesController extends Controller
     {
         //Cojo el usuarioLaboratorio de la BD usando el id del usuario de la sesion
         $usuarioId = $request->session()->get('usuario');
+        if($usuarioId == null) {
+            Auth::logout();
+            return Redirect::route('home');
+        }
         $usuarioLaboratorio = UsuarioLaboratorio::where('usu_id', $usuarioId) -> first();
         // Ahora creo el nuevo albarán con el laboratorio del usuario
         $albaran = new Albaran();
@@ -76,10 +84,11 @@ class AlbaranesController extends Controller
         if($proximoNumAlbaran == null)
             $proximoNumAlbaran = 1;
         $request->merge(['alb_numero' => $proximoNumAlbaran]);
-        Albaran::create($request->all());
+        $newAlbaran = Albaran::create($request->all());
         Session::flash('confirmacion','Se ha creado el nuevo albarán ' . $request->get('alb_numero'));
 
-        return redirect('/albaranes');
+        //return redirect('/albaranes');
+        return $this->mostrarAlbaran($newAlbaran);
     }
 
     public function editarAlbaran(Request $request, Albaran $albaran)
@@ -116,4 +125,32 @@ class AlbaranesController extends Controller
         // // Y ESTO LO SACA EN OTRA PESTAÑA
         return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
     }
+
+        /**
+     * Se mira si pertenece a alguna factura
+     * - Si esta facturado no lo deberíamos poder borrar
+     * - Sino se borra (BORRANDO ANTES LOS TRABAJOS ASOCIADOS)
+     */
+    public function eliminarAlbaran(Albaran $albaran){
+        $idFactura = $albaran->fac_id;
+        $trabajos = Trabajo::where('alb_id', $albaran->alb_id)->get();
+
+        if($idFactura == null){
+            foreach ($trabajos as $trabajo) {
+                $trabajo->delete();
+            }
+            $albaran->delete();
+        } else {
+            foreach ($trabajos as $trabajo) {
+                $trabajo->delete();
+            }
+            $albaran->delete();
+            // $albaran->alb_borrado = 'S';
+            // $albaran->save();
+        }
+
+        Session::flash('confirmacion','El albarán ha sido eliminado correctamente');
+        return redirect('/albaranes');
+    }
+
 }

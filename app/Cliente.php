@@ -34,6 +34,6 @@ class Cliente extends Model
     public $timestamps = false;
 
     public function __toString() {
-        return $this->cli_nombre_corto . ' ' . $this->cli_direccion .' '.$this->cli_ciudad .'-'.$this->cli_cod_pos .' '. $this->cli_nif;
+        return $this->cli_nombre . ' ' . $this->cli_nif;
     }
 }

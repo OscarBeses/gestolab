@@ -22,20 +22,25 @@
                     @method('put') @endisset @csrf
                     <div class="form-row">
                         @isset($albaran->alb_numero)
-                        <div class="form-group col-md-3 col-lg-3 col-xl-2">
+                        <div class="form-group col-md-4">
                             <label class="min-width-120">Nº de albarán</label>
                             <input type="text" class="form-control" name="alb_numero" value="{{ $albaran->alb_numero }}" readonly>
                         </div>
                         @endisset
-                        <div class="form-group col-md-12 col-lg-9 col-xl-10">
-                            <label>Laboratorio</label>
-                            <label class="form-control overflow-auto input-ancho">{{ $albaran->laboratorio }}</label>
+                        <div class="form-group col-sm-12 col-md-5 offset-md-3">
+                            <label for="alb_fecha_entrega">Fecha estimada de entrega</label>
+                            <input type="date" class="form-control datepicker" id="alb_fecha_entrega" placeholder="Fecha de entrega" name="alb_fecha_entrega"
+                                value="{{ Helper::getDatoAnterior($albaran, 'alb_fecha_entrega') }}">
+                        </div>
+                        {{-- <div class="form-group col-md-12 col-lg-9 col-xl-10"> --}}
+                            {{-- <label>Laboratorio</label>
+                            <label class="form-control overflow-auto input-ancho">{{ $albaran->laboratorio }}</label> --}}
                             <input type="hidden" name="lab_id" value="{{ $albaran->laboratorio->lab_id }}"> 
                             {{-- Mientras solo haya un laboratorio lo dejaré así
                             <select class="custom-select mr-2" name="lab_id" readonly>
                                 <option value="{{ $albaran->laboratorio->lab_id }}">{{ $albaran->laboratorio }}</option>
                             </select> --}}
-                        </div>
+                        {{-- </div> --}}
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
@@ -46,17 +51,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-sm-12 col-md-6 col-lg-5 col-xl-4">
-                            <label for="alb_fecha_entrega">Fecha estimada de entrega</label>
-                            <input type="date" class="form-control datepicker" id="alb_fecha_entrega" placeholder="Fecha de entrega" name="alb_fecha_entrega"
-                                value="{{ Helper::getDatoAnterior($albaran, 'alb_fecha_entrega') }}">
-                        </div>
+                        
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="font-weight-bold">
-                                @if (is_null($albaran->factura))
+                                @if (is_null($albaran->fac_id))
                                     Sin facturar
                                 @else
                                     Facturado en la factura nº {{ $albaran->factura->fac_numero }} emitida a fecha {{ $albaran->factura->fac_fecha_emision->format('d/m/Y') }}

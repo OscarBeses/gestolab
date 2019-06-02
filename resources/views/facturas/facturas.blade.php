@@ -29,7 +29,7 @@
                         </small>
                     @endisset
                     <div class="col-xs-1">
-                        <a href="{{ route('albaran.imprimir', [$factura->fac_id]) }}" class="btn btn-success btn-sm float-right boton-editar">
+                        <a href="{{ route('factura.imprimir', [$factura->fac_id]) }}" class="btn btn-success btn-sm float-right boton-editar">
                             <i class="fas fa-file-export"></i>
                         </a>
                     </div>

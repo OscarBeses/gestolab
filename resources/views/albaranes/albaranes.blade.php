@@ -31,9 +31,17 @@
                         @endisset
                     </small>
                     <div class="col-xs-1">
-                        <a href="{{ route('albaran', [$albaran->alb_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
-                            <i class="far fa-edit"></i>
-                        </a>
+                        <form action="{{ route('albaran.eliminar', $albaran->alb_id) }}" method="POST">
+                            @csrf
+                            <div class="btn-group">
+                                <a href="{{ route('albaran', [$albaran->alb_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que desea borrar el albarán y sus trabajos?')">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </li>

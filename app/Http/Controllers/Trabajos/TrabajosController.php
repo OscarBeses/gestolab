@@ -41,6 +41,7 @@ class TrabajosController extends Controller
     public function mostrarTrabajoNuevo(Request $request, Albaran $albaran)
     {
         $trabajo = new Trabajo();
+        $trabajo->tra_cantidad = 1;
         $trabajo->alb_id = $albaran->alb_id;
 
         $productos = Producto::all();

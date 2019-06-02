@@ -32,11 +32,31 @@ const app = new Vue({
     el: '#app'
 });
 
-/**
- * Tras emitir ocultamos los botones de guardar albaran, añadir trabajo y modificar o borrar trabajos
- */
-function trasEmitir() {
-    $("#divGuardar").remove();
-    $("#divNuevoTrabajo").remove();
-    $(".tdBtnEditarBorrar").remove();
-}
+$(document).ready(function(){
+
+    /**
+     * Al seleccionar un producto se realiza una petición ajax 
+     * para averiguar el precio y colocarlo en el campo importe
+     */
+    $("select#prod").change(function(e) {
+        var idProducto = e.target.value;
+        
+        // AJAX
+        $.get('/ajax-damePrecioProd?prod_id='+idProducto, function(data){
+            var importeProd = data[0].prd_importe
+            $("input#imp").val(importeProd);
+        });
+
+    });
+    
+    /**
+     * Tras emitir ocultamos los botones de guardar albaran, añadir trabajo y modificar o borrar trabajos
+     */
+    function trasEmitir() {
+        $("#divGuardar").remove();
+        $("#divNuevoTrabajo").remove();
+        $(".tdBtnEditarBorrar").remove();
+    }
+
+});
+
