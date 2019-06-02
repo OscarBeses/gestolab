@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Facturas;
 
 use App\Albaran;
-use App\Factura;
+use App\Cliente;
 
-use App\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade as PDF;
+use App\Factura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 
 class FacturasController extends Controller

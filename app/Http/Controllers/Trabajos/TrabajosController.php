@@ -7,6 +7,9 @@ use App\Trabajo;
 use App\Producto;
 use App\TecnicoTrabajo;
 use App\TrabajoDetalle;
+
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -103,4 +106,11 @@ class TrabajosController extends Controller
         Session::flash('confirmacion','El trabajo ha sido eliminado correctamente');
         return redirect()->route('albaran', $idAlbaran);
     }
+
+    public function damePrecioProd(){
+        $prod_id = Input::get('prod_id');
+        $producto = Producto::where('prd_id', $prod_id)->get();
+        return Response::json($producto);
+    }
+
 }

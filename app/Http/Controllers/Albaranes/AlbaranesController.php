@@ -117,13 +117,14 @@ class AlbaranesController extends Controller
             // Si no se ha emitido se emite.
             $albaran->alb_fecha_emision = Carbon::now();
             $albaran->save();
+            return $this->mostrarAlbaran($albaran);
+        } else {
+            $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));        
+            // // ESTO LO DESCARGA:
+            // //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
+            // // Y ESTO LO SACA EN OTRA PESTAÑA
+            return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
         }
-        
-        $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));        
-        // // ESTO LO DESCARGA:
-        // //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
-        // // Y ESTO LO SACA EN OTRA PESTAÑA
-        return $pdf->stream('albaran-'.$albaran->alb_numero.'.pdf', array("Attachment" => false));
     }
 
         /**
@@ -134,6 +135,7 @@ class AlbaranesController extends Controller
     public function eliminarAlbaran(Albaran $albaran){
         $idFactura = $albaran->fac_id;
         $trabajos = Trabajo::where('alb_id', $albaran->alb_id)->get();
+        $numeroAlbaran = $albaran->alb_numero;
 
         if($idFactura == null){
             foreach ($trabajos as $trabajo) {
@@ -149,7 +151,7 @@ class AlbaranesController extends Controller
             // $albaran->save();
         }
 
-        Session::flash('confirmacion','El albarán ha sido eliminado correctamente');
+        Session::flash('confirmacion','El albarán '.$numeroAlbaran.' ha sido eliminado correctamente');
         return redirect('/albaranes');
     }
 

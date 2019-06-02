@@ -46,7 +46,7 @@
                 </div>
             </li>
         @empty
-            <li>No hay albaranes registrados</li>
+            <li class="list-group-item text-center">No hay albaranes registrados</li>
         @endforelse
     </ul>
     {{ $albaranes->links() }}

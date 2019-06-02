@@ -11,7 +11,7 @@
     @include('componentes/mensajeConfirmacion')
     
     <div class="row">
-        <a href="{{ url('/factura/nueva') }}" class="btn btn-info">Nuevo factura</a>
+        <a href="{{ url('/facturas/nueva') }}" class="btn btn-info">Nueva factura</a>
     </div>
 
     <ul class="list-group my-3">
@@ -36,7 +36,7 @@
                 </div>
             </li>
         @empty
-            <li>No hay facturas registradas</li>
+        <li class="list-group-item text-center">No hay facturas registradas</li>
         @endforelse
     </ul>
     {{ $facturas->links() }}
