@@ -52,6 +52,9 @@ Route::get('/', function () {
     else
         return view('welcome');
 })->name('welcome');
+
+Route::get('/albaranes/ajax-damePrecioProd', 'Trabajos\TrabajosController@damePrecioProd');
+
 // Ruta clientes y clientes/cli_id
 Route::get('/clientes', 'Clientes\ClientesController@mostrarClientes')->name('clientes');// Muestra la vista con los clientes
 Route::get('/clientes/nuevo', 'Clientes\ClientesController@mostrarClienteNuevo');// Muestra la vista para crear uno nuevo
@@ -81,7 +84,6 @@ Route::put('/albaranes/trabajos/nuevo', 'Trabajos\TrabajosController@guardarTrab
 Route::get('/albaranes/trabajos/{trabajo}', 'Trabajos\TrabajosController@mostrarTrabajo')->name('trabajo');
 Route::post('/albaranes/trabajos/{trabajo}/editar', 'Trabajos\TrabajosController@editarTrabajo')->name('trabajo.editar');
 Route::post('/albaranes/trabajos/{trabajo}/eliminar', 'Trabajos\TrabajosController@eliminarTrabajo')->name('trabajo.eliminar');
-Route::get('/albaranes/ajax-damePrecioProd', 'Trabajos\TrabajosController@damePrecioProd');
 
 // Ruta para facturas
 Route::get('/facturas', 'Facturas\FacturasController@mostrarFacturas')->name('facturas');

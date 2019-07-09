@@ -108,7 +108,7 @@ class TrabajosController extends Controller
     }
 
     public function damePrecioProd(){
-        $prod_id = Input::get('prod_id');
+        $prod_id = Input::get('prd_id');
         $producto = Producto::where('prd_id', $prod_id)->get();
         return Response::json($producto);
     }
