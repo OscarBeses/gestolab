@@ -1,5 +1,5 @@
 body { 
-  font-size: 10pt;
+  font-size: 9pt;
   font-weight: bold;
   font-family: 'Nunito', sans-serif;
   text-transform: uppercase;
@@ -52,6 +52,12 @@ body {
 .detalle-derecha{
   top:35px;
   left: 0px;
+}
+
+#paciente-profesor > div {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 table {

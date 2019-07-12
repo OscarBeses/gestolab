@@ -77,7 +77,9 @@ class AlbaranesController extends Controller
             'lab_id' => 'required',
             'alb_fecha_emision' => 'nullable',
             'alb_fecha_entrega' => 'nullable',
-            'fac_id' => 'nullable'
+            'fac_id' => 'nullable',
+            'alb_profesor' => 'nullable',
+            'alb_paciente' => 'nullable'
         ]);
 
         $proximoNumAlbaran = DB::table('albaran')->max('alb_numero') + 1;
@@ -99,7 +101,9 @@ class AlbaranesController extends Controller
             'lab_id' => 'required',
             'alb_fecha_emision' => 'nullable',
             'alb_fecha_entrega' => 'nullable',
-            'fac_id' => 'nullable'
+            'fac_id' => 'nullable',
+            'alb_profesor' => 'nullable',
+            'alb_paciente' => 'nullable'
         ]);
 
         $albaran->update($request->all());
@@ -119,7 +123,7 @@ class AlbaranesController extends Controller
             $albaran->save();
             return $this->mostrarAlbaran($albaran);
         } else {
-            $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));        
+            $pdf = PDF::loadView('albaranes.pdf', compact('albaran'));
             // // ESTO LO DESCARGA:
             // //return $pdf->download('albaran-'.$albaran->alb_numero.'.pdf');
             // // Y ESTO LO SACA EN OTRA PESTAÑA
@@ -127,7 +131,7 @@ class AlbaranesController extends Controller
         }
     }
 
-        /**
+    /**
      * Se mira si pertenece a alguna factura
      * - Si esta facturado no lo deberíamos poder borrar
      * - Sino se borra (BORRANDO ANTES LOS TRABAJOS ASOCIADOS)

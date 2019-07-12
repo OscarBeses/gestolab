@@ -2,8 +2,8 @@
 /* AHORA NO ELIMINO QUE HAY QUE MANTENER LAS MIGRACIONES 
 drop database if exists gestolab;
 create database gestolab default charset=utf8mb4_unicode_ci;
-use gestolab;
 */
+use gestolab;
  
 /*
 DROP USER IF EXISTS 'oski_bc'; 
@@ -98,14 +98,15 @@ create table trabajo (
 	foreign key (alb_id) references albaran(alb_id)
 ) COMMENT 'Cada item de un albarán';
 
-create table trabajo_detalle (
-	trd_id bigint(20) unsigned auto_increment,
-	trd_odontologo varchar(50),
-	trd_paciente varchar(50),
-    tra_id bigint(20) unsigned,	
-    primary key (trd_id),
-	foreign key (tra_id) references trabajo(tra_id)
-) COMMENT 'Solo algunos trabajos tienen detalle';
+-- hay que borrar esta tabla
+-- create table trabajo_detalle (
+-- 	trd_id bigint(20) unsigned auto_increment,
+-- 	trd_odontologo varchar(50),
+-- 	trd_paciente varchar(50),
+--     tra_id bigint(20) unsigned,	
+--     primary key (trd_id),
+-- 	foreign key (tra_id) references trabajo(tra_id)
+-- ) COMMENT 'Solo algunos trabajos tienen detalle';
 
 create table tecnico (
 	tec_id bigint(20) unsigned auto_increment,
@@ -123,45 +124,58 @@ create table tecnico_trabajo (
 	foreign key (tra_id) references trabajo(tra_id)
 ) COMMENT 'Los trabajos de cada tecnico';
 
-/* CREO EL ÚNICO USUARIO QUE TENDÁ LA APLICACIÓN */
+/* CREO EL ÚNICO USUARIO QUE TENDÁ LA APLICACIÓN  y lo vinculo al laboratorio*/
 INSERT INTO users (id, name, email, email_verified_at, password, remember_token, created_at, updated_at) VALUES
-(111, 'oscar', 'oscar.beses@gmail.com', NULL, '$2y$10$uXLjfPTSiM/zi4DBVjQiQukGblbFioyhS8OB.t9qoxyirpqpP9zlW', 'PpRYAxk4tmMOrRkFEltW9Gf0UqYZuCGQsFGsmdhl6tw2n5bp0GW3ZYU1aXiH', '2019-04-22 17:34:07', '2019-04-22 17:34:07');
-/* CREO DATOS DE PRUEBA SIMULANDO UN FLUJO DE TRABAJO NORMAL */
+(1, 'oscar', 'oscar.beses@gmail.com', NULL, '$2y$10$uXLjfPTSiM/zi4DBVjQiQukGblbFioyhS8OB.t9qoxyirpqpP9zlW', 'PpRYAxk4tmMOrRkFEltW9Gf0UqYZuCGQsFGsmdhl6tw2n5bp0GW3ZYU1aXiH', '2019-04-22 17:34:07', '2019-04-22 17:34:07');
 INSERT INTO laboratorio (lab_id, lab_nif, lab_nombre, lab_nombre_corto, lab_cod_pos, lab_ciudad, lab_municipio, lab_direccion) 
-	VALUES (22, '19891050Y', 'RAMÓN BESES SORIA', 'RAMÓN BESES', '46024', 'Valencia', NULL, 'Calle del parque de Nazaret 44 Bajo');
+	VALUES (2, '19891050Y', 'RAMÓN BESES SORIA', 'RAMÓN BESES', '46024', 'Valencia', NULL, 'Calle del parque de Nazaret 44 Bajo');
 INSERT INTO usuario_laboratorio (usu_id, lab_id) 
-	VALUES (111, 22);
+	VALUES (1, 2);
+
 /* Primer cliente */
-INSERT INTO cliente (cli_id, cli_nif, cli_nombre, cli_nombre_corto, cli_cod_pos, cli_ciudad, cli_municipio, cli_direccion) 
-	VALUES (33, 'G28423275', 'Universidad Cardenal Herrera-CEU \"Clínica Odontológica"', 'CEU', '46113', 'Valencia', 'Moncada', 'Edificio Seminario S/N');
+INSERT INTO cliente (cli_nif, cli_nombre, cli_nombre_corto, cli_cod_pos, cli_ciudad, cli_municipio, cli_direccion) 
+	VALUES ('G28423275', 'Universidad Cardenal Herrera-CEU "Clínica Odontológica"', 'CEU', '46113', 'Valencia', 'Moncada', 'Edificio Seminario S/N');
 /* Inserto un producto de ejemplo */
-INSERT INTO producto (prd_id, prd_descripcion, prd_importe, prd_observaciones) 
-	VALUES (3, 'Corona ceramometálica', '56.01', '* No incluye hierro');
-INSERT INTO producto (prd_id, prd_descripcion, prd_importe, prd_observaciones) 
-	VALUES (34, 'Corona entera', '56.01', '* Si incluye hierro');
-/* Creo un par de técnicos */
-INSERT INTO tecnico (tec_id, tec_nombre) 
-	VALUES (1, 'Lucía Beses');
-INSERT INTO tecnico (tec_id, tec_nombre) 
-	VALUES (2, 'Karla Corrales');	
-/* Creo el albarán sin nº de factura y sin fecha de emisión porque aún no se ha facturado */
+INSERT INTO producto (prd_descripcion, prd_importe, prd_observaciones) 
+	VALUES ('Esquelético', '85', 'Prótesis parcial metálica');
+INSERT INTO producto (prd_descripcion, prd_importe, prd_observaciones) 
+	VALUES ('Compostura simple esquelético', '29', 'Prótesis parcial metálica');
+INSERT INTO producto (prd_descripcion, prd_importe, prd_observaciones) 
+	VALUES ('Prótesis removible acrílica - Parcial 1/2 pieza ', '29.90', 'ganchos aparte');
+/* Creo un par de técnicos - de momento no habrá tecnicos*/ 
+-- INSERT INTO tecnico (tec_id, tec_nombre) 
+-- 	VALUES (1, 'Lucía Beses');
+-- INSERT INTO tecnico (tec_id, tec_nombre) 
+-- 	VALUES (2, 'Karla Corrales');	
+/* Creo el albarán sin nº de factura y sin fecha de emisión porque aún no se ha facturado 
 INSERT INTO albaran (alb_id, alb_numero, cli_id, lab_id, alb_fecha_emision, fac_id) 
 	VALUES (44, 4, 33, 22, NULL, NULL);
-/* Creo un trabajo que no coincide exactamente con el precio del producto por un supuesto descuento */
+*/
+/* Creo un trabajo que no coincide exactamente con el precio del producto por un supuesto descuento 
 INSERT INTO trabajo (tra_id, tra_observaciones, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
 	VALUES (5, null, 3, 1, '45.00', 44);
 INSERT INTO trabajo (tra_id, tra_observaciones, prd_id, tra_cantidad, tra_precio_unidad, alb_id) 
 	VALUES (51, 'Un comentario sin mas', 3, 2, '1.11', 44);
-INSERT INTO trabajo_detalle (trd_id, trd_odontologo, trd_paciente, tra_id) 
-	VALUES (NULL, 'Beatriz Castillo', 'Mª. Jesús Corral', 5);
-/* Le asigno dos técnicos al mismo trabajo */
+*/
+-- INSERT INTO trabajo_detalle (trd_id, trd_odontologo, trd_paciente, tra_id) 
+-- 	VALUES (NULL, 'Beatriz Castillo', 'Mª. Jesús Corral', 5);
+
+/* Le asigno dos técnicos al mismo trabajo
 INSERT INTO tecnico_trabajo (tec_id, tra_id) 
 	VALUES (1, 5);
 INSERT INTO tecnico_trabajo (tec_id, tra_id) 
 	VALUES (2, 5);
-/* Ahora que ya se ha terminado el albarán se emite */
+*/
+/* Ahora que ya se ha terminado el albarán se emite 
 UPDATE albaran SET alb_fecha_emision = '2019-03-31' WHERE alb_id = 44;
-/* Y ahora que ya tengo un albarán para un cliente voy a facturarlo */
+*/
+/* Y ahora que ya tengo un albarán para un cliente voy a facturarlo 
 INSERT INTO factura (fac_id, fac_numero, fac_fecha_emision) 
 	VALUES (66, 6, CURDATE());
 UPDATE albaran SET fac_id = 66 WHERE alb_id = 44;
+*/
+
+-- NUEVAS MODIFICACIONES
+ALTER TABLE albaran
+ADD alb_profesor varchar(255),
+ADD alb_paciente varchar(255);

@@ -62,6 +62,20 @@
 
         </div>
 
+        <!-- Linea paciente - profesor -->
+        <div id="paciente-profesor">
+            @isset($albaran->alb_profesor)
+            <div>
+                PROFESOR: {{ $albaran->alb_profesor }}
+            </div>
+            @endisset
+            @isset($albaran->alb_paciente)
+            <div>
+                PACIENTE: {{ $albaran->alb_paciente }}
+            </div>
+            @endisset
+        </div>
+
         <!-- DETALLE DONDE VAN LOS TRABAJOS -->
         <div id="detalle">
             <table>
@@ -91,12 +105,12 @@
                             <td>{{ number_format($subTotal, 2, ',', ' ') }}</td>
                         </tr>
                     @endforeach
-                    <tr><td></td><td></td><td></td><td></td></tr>
-                    <tr><td></td><td></td><td></td><td></td></tr>
-                    <tr><td></td><td></td><td></td><td></td></tr>
-                    <tr><td></td><td></td><td></td><td></td></tr>
-                    <tr><td></td><td></td><td></td><td></td></tr>
-                    <tr><td></td><td></td><td></td><td></td></tr>
+                    @php
+                        $numTrabajos = count($albaran->trabajos);
+                    @endphp
+                    @for ($i = 0; $i < 10-$numTrabajos; $i++)
+                        <tr><td></td><td></td><td></td><td></td></tr>
+                    @endfor
                 </tbody>
                 <tfoot>
                     <tr>

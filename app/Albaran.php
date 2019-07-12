@@ -25,7 +25,9 @@ class Albaran extends Model
         'lab_id',
         'alb_fecha_emision', 
         'alb_fecha_entrega',
-        'fac_id'
+        'fac_id',
+        'alb_profesor',
+        'alb_paciente'
     ];
     /**
      * Con esto indico los campos que son fechas (instancias de Carbon)

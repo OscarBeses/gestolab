@@ -43,7 +43,7 @@
                         {{-- </div> --}}
                     </div>
                     <div class="form-row">
-                        <div class="form-group col">
+                        <div class="form-group col-12">
                             <label for="cliente">Cliente</label>
                             <select class="custom-select mr-sm-2" id="cliente" name="cli_id" @isset($albaran->alb_id) readonly @endisset>
                                 @foreach ($clientes as $cliente)
@@ -51,7 +51,18 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+                        @if (isset($albaran->alb_profesor) || !isset($albaran->alb_fecha_emision))
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label for="profesor">Profesor</label>
+                            <input type="text" class="form-control" name="alb_profesor" value="{{ $albaran->alb_profesor }} "id="profesor">
+                        </div>
+                        @endif
+                        @if (isset($albaran->alb_paciente) || !isset($albaran->alb_fecha_emision))
+                        <div class="form-group col-sm-12 col-md-6">
+                            <label for="paciente">Paciente</label>
+                            <input type="text" class="form-control" name="alb_paciente" value="{{ $albaran->alb_paciente }} " id="paciente">
+                        </div>
+                        @endif
                     </div>
                     
                     <div class="form-row">
@@ -144,8 +155,7 @@
         <!-- BOTON IMPRIMIR Y ATRÁS -->
         <div class="row">
             <div class="col-12">
-                <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}"
-                    onclick="trasEmitir()">
+                <a class="btn mx-2 btn-warning float-right" href="{{ route('albaran.imprimir', $albaran->alb_id) }}">
                     @isset($albaran->alb_fecha_emision)
                         Imprimir Albarán
                     @else

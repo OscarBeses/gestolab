@@ -47,12 +47,7 @@ class FacturasController extends Controller
      */
     public function generarFacturaNueva(Request $request)
     {
-        // $request->validate([
-        //     'cli_id' => 'required',
-        // ]);
-
         // Cojo el cliente seleccionado
-        // $clienteId = $request->get('cliente');
         $clienteId = $request->input("cli_id");
 
         // Se cojen los albaranes que agrupa la factura (albaranes del cliente pasado y que tengan fecha de emision pero no fac_id)
@@ -64,25 +59,30 @@ class FacturasController extends Controller
                         ->get();
 
         // SI NO HAY ALBARANES EMITIDOS NO DEBERÍA DEJAR HACER UNA FACTURA (sesion flash aqui y return)
-
-        $proxNumFactura = DB::table('albaran')->max('alb_numero') + 1;
-        if($proxNumFactura == null)
-            $proxNumFactura = 1;
-
-        // Guardo la nueva factura
-        $factura = new Factura();
-        $factura->fac_numero = $proxNumFactura;
-        $factura->fac_fecha_emision = Carbon::now();
-        $factura->save();
-
-        // Se actualiza la factura de todos los albaranes incluidos
-        foreach ($albaranes as $albaran){
-            $albaran->fac_id = $factura->fac_id;
-            $albaran->save();
+        if (count($albaranes) == 0) {
+            Session::flash('error','No puedes realizar una factura si no hay albaranes emitidos');
+            return $this->mostrarFacturas();
+        } else {
+            $proxNumFactura = DB::table('albaran')->max('alb_numero') + 1;
+            if($proxNumFactura == null)
+                $proxNumFactura = 1;
+    
+            // Guardo la nueva factura
+            $factura = new Factura();
+            $factura->fac_numero = $proxNumFactura;
+            $factura->fac_fecha_emision = Carbon::now();
+            $factura->save();
+    
+            // Se actualiza la factura de todos los albaranes incluidos
+            foreach ($albaranes as $albaran){
+                $albaran->fac_id = $factura->fac_id;
+                $albaran->save();
+            }
+    
+            Session::flash('confirmacion','Se ha creado la nueva factura ' . $proxNumFactura);
+            return $this->mostrarFacturas();
         }
-
-        Session::flash('confirmacion','Se ha creado la nueva factura ' . $proxNumFactura);
-        return $this->mostrarFacturas();
+        
     }
 
     /**
