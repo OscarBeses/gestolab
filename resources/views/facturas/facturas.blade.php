@@ -21,16 +21,24 @@
                     <h5 class="mb-1">{{ $factura->fac_numero }}</h5>
                     <small>{{ $factura->dameTotal() . ' €' }}</small>
                 </div>
-                <p class="mb-1">Compuesta por {{ $factura->albaranes->count() }} albaranes</p>
+                <p class="mb-1">
+                    {{ $factura->albaranes->first()->cliente->cli_nombre }}
+                    <br/>
+                    Compuesta por {{ $factura->albaranes->count() }} albaranes
+                </p>
                 <div class="row">
                     @isset($factura->fac_fecha_emision)
                         <small class="col mt-2">
-                            Emitido el {{ $factura->fac_fecha_emision->format('d/m/Y') }} 
+                            Emitida a {{ $factura->fac_fecha_emision->format('d/m/Y') }} 
                         </small>
                     @endisset
                     <div class="col-xs-1">
-                        <a href="{{ route('factura.imprimir', [$factura->fac_id]) }}" class="btn btn-success btn-sm float-right boton-editar">
-                            <i class="fas fa-file-export"></i>
+                        <a href="{{ route('factura.imprimir', [$factura->fac_id]) }}" class="btn btn-success btn-sm boton-editar">
+                            Imprimir <i class="fas fa-file-export"></i>
+                        </a>
+                        <a href="{{ route('factura.eliminar', [$factura->fac_id]) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('¿Seguro que desea borrar la factura?')">
+                            <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
                 </div>

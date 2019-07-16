@@ -35,8 +35,8 @@ const app = new Vue({
 $(document).ready(function(){
 
     /**
-     * Al seleccionar un producto se realiza una petición ajax 
-     * para averiguar el precio y colocarlo en el campo importe
+     * Al seleccionar un producto en la ventana albarán se realiza una petición ajax 
+     * para averiguar el precio y colocarlo en el campo importe.
      */
     $("select#prod").change(function (e) {
         var idProducto = e.target.value; // AJAX

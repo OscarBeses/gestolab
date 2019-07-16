@@ -27,7 +27,7 @@ class ProductosController extends Controller
      */
     public function mostrarProductos()
     {
-        $productos = Producto::where('prd_borrado', 'N')->orderBy('prd_id', 'desc')->paginate(3);
+        $productos = Producto::where('prd_borrado', 'N')->orderBy('prd_id', 'desc')->paginate(6);
         return view('productos.productos', compact('productos'));
     }
 

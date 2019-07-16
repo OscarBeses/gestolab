@@ -25,7 +25,10 @@
                 <div class="row">
                     <small class="col mt-2">
                         @isset($albaran->alb_fecha_emision)
-                            Emitido el {{ $albaran->alb_fecha_emision->format('d/m/Y') }} 
+                            Emitido a {{ $albaran->alb_fecha_emision->format('d/m/Y') }} 
+                            @isset($albaran->fac_id)
+                                - Facturado el  {{ $albaran->factura->fac_fecha_emision->format('d/m/Y') }} 
+                            @endisset
                         @else
                             - Pendiente de emisión - 
                         @endisset

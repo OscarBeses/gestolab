@@ -85,16 +85,20 @@ class Albaran extends Model
      */
     public function getCadenaTrabajos() {
         $cadenaTrabajos = '';
-        foreach ($this->trabajos as $trabajo) {
-           $cadenaTrabajos .= $trabajo->producto->prd_descripcion . ', ' ;
-        }
+        if(count($this->trabajos) == 1){
+            $cadenaTrabajos .= $this->trabajos->first()->producto->prd_descripcion; 
+        } else {
+            foreach ($this->trabajos as $trabajo) {
+                $cadenaTrabajos .= $trabajo->producto->prd_descripcion . ', ';
+            }
+        }        
 
         $longitud = mb_strlen($cadenaTrabajos);
         if ($longitud > 50) {
-            $cadenaTrabajos = substr($cadenaTrabajos, 0, 50);
+            $cadenaTrabajos = mb_substr($cadenaTrabajos, 0, 50);
             $cadenaTrabajos .= '...'; 
         } else if ($longitud > 0){
-            $cadenaTrabajos = substr($cadenaTrabajos, 0, $longitud);
+            $cadenaTrabajos = mb_substr($cadenaTrabajos, 0, $longitud);
         } else {
             $cadenaTrabajos = "Sin trabajos asignados";
         }

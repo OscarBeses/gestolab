@@ -32,7 +32,7 @@ class FacturasController extends Controller
      */
     public function mostrarFacturas()
     {
-        $facturas = Factura::orderBy('fac_id', 'desc')->paginate(3);
+        $facturas = Factura::orderBy('fac_id', 'desc')->paginate(6);
         return view('facturas.facturas', compact('facturas'));
     }
 
@@ -60,7 +60,7 @@ class FacturasController extends Controller
 
         // SI NO HAY ALBARANES EMITIDOS NO DEBERÍA DEJAR HACER UNA FACTURA (sesion flash aqui y return)
         if (count($albaranes) == 0) {
-            Session::flash('error','No puedes realizar una factura si no hay albaranes emitidos');
+            Session::flash('error','No puedes realizar una factura si no hay albaranes de ese cliente emitidos');
             return $this->mostrarFacturas();
         } else {
             $proxNumFactura = DB::table('albaran')->max('alb_numero') + 1;
@@ -99,4 +99,22 @@ class FacturasController extends Controller
         // Y ESTO LO SACA EN OTRA PESTAÑA
         return $pdf->stream('factura-'.$factura->fac_numero.'.pdf', array("Attachment" => false));
     }
+
+    /**
+     * Elimina la factura y desfactura todos los albaranes asociados
+     */
+    public function eliminarFactura(Factura $factura)
+    {
+        $numFactura = $factura->fac_numero;
+        $albaranes = $factura->albaranes;
+        foreach ($albaranes as $albaran){
+            $albaran->fac_id = null;
+            $albaran->save();
+        }
+        $factura->delete();
+        
+        Session::flash('confirmacion','Se ha eliminado correctamente la factura nº ' . $numFactura);
+        return $this->mostrarFacturas();
+    }
+
 }

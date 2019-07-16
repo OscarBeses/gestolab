@@ -1,0 +1,88 @@
+body { 
+  font-size: 9pt;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#header {
+  color: darkgreen;
+}
+
+.absolute{
+  position: absolute;
+}
+
+#lab-cli{
+  height: 130px;
+}
+#lab-cli > .top-left {
+  top: 15px;
+  left: 0px;
+  width: 49%;
+}
+#lab-cli > .top-right {
+  top: 15px;
+  right: 0px;
+  width: 40%;
+}
+
+.detalle-izquierda{
+  top:35px;
+  left: 0px;
+}
+
+.detalle-derecha{
+  top:35px;
+  left: 0px;
+}
+
+.margen-izquierda{
+  margin-left: 40px;
+}
+
+table {
+  width: 99%;
+  margin: 20px 10px;
+  table-layout: auto;
+}
+.fixed {
+  table-layout: fixed;
+}
+
+table,
+th {
+  border-collapse: collapse;
+  padding: 2px 10px;
+  border: solid 1px black;
+  text-align: center;
+}
+td{
+  height: 15px;
+  padding: 10px 5px;
+}
+.w {
+  width: 75px;
+}
+
+.contenido td{
+  color:green;
+  border-right: 1px solid black;
+}
+
+td.td-derecha{
+  color:black;
+}
+
+.td-izquierda{
+  text-align: left;
+}
+
+.total-factura{
+  border: 1px solid black;
+  font-size: 11pt;
+}
+
+.datos-extra{
+  top: 100px;
+}

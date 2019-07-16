@@ -90,3 +90,4 @@ Route::get('/facturas', 'Facturas\FacturasController@mostrarFacturas')->name('fa
 Route::get('/facturas/nueva', 'Facturas\FacturasController@mostrarGeneradorFacturas')->name('generador');
 Route::put('/facturas/generar', 'Facturas\FacturasController@generarFacturaNueva')->name('factura.generar');
 Route::get('/facturas/{factura}/imprimir', 'Facturas\FacturasController@imprimirFactura')->name('factura.imprimir');
+Route::get('/facturas/{factura}/eliminar', 'Facturas\FacturasController@eliminarFactura')->name('factura.eliminar');

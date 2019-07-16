@@ -77,52 +77,50 @@
         </div>
 
         <!-- DETALLE DONDE VAN LOS TRABAJOS -->
-        <div id="detalle">
-            <table>
-                <thead>
-                    <tr>
-                        <th class="w">Cantidad</th>
-                        <th class="izquierda">Descipción</th>
-                        <th class="w">P/U</th>
-                        <th class="w">Importe</th>
+        <table>
+            <thead>
+                <tr>
+                    <th class="w">Cantidad</th>
+                    <th class="izquierda">Descipción</th>
+                    <th class="w">P/U</th>
+                    <th class="w">Importe</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php $total = 0; @endphp
+                @foreach ($albaran->trabajos as $trabajo)
+                    <tr class="contenido">
+                        @php
+                            $cant = $trabajo->tra_cantidad;
+                            $pvp = $trabajo->tra_precio_unidad;
+                            $subTotal = $cant * $pvp;
+                            $total += $subTotal;
+                        @endphp
+                        <td> {{ $cant }} </td>
+                        <td class="izquierda">{{ $trabajo->producto->prd_descripcion }}
+                            <small> {{ $trabajo->tra_observaciones }}</small>
+                        </td>
+                        <td>{{ number_format($pvp, 2, ',', ' ') }}</td>
+                        <td>{{ number_format($subTotal, 2, ',', ' ') }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @php $total = 0; @endphp
-                    @foreach ($albaran->trabajos as $trabajo)
-                        <tr class="contenido">
-                            @php
-                                $cant = $trabajo->tra_cantidad;
-                                $pvp = $trabajo->tra_precio_unidad;
-                                $subTotal = $cant * $pvp;
-                                $total += $subTotal;
-                            @endphp
-                            <td> {{ $cant }} </td>
-                            <td class="izquierda">{{ $trabajo->producto->prd_descripcion }}
-                                <small> {{ $trabajo->tra_observaciones }}</small>
-                            </td>
-                            <td>{{ number_format($pvp, 2, ',', ' ') }}</td>
-                            <td>{{ number_format($subTotal, 2, ',', ' ') }}</td>
-                        </tr>
-                    @endforeach
-                    @php
-                        $numTrabajos = count($albaran->trabajos);
-                    @endphp
-                    @for ($i = 0; $i < 10-$numTrabajos; $i++)
-                        <tr><td></td><td></td><td></td><td></td></tr>
-                    @endfor
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Total:</td>
-                        <td>{{ number_format($total, 2, ',', ' ') }} €</td>
-                    </tr>
-                </tfoot>
-            </table>
-            <label>ALBARAN Nº {{ $albaran->alb_numero }}</label>
-        </div>
+                @endforeach
+                @php
+                    $numTrabajos = count($albaran->trabajos);
+                @endphp
+                @for ($i = 0; $i < 10-$numTrabajos; $i++)
+                    <tr><td></td><td></td><td></td><td></td></tr>
+                @endfor
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <td>{{ number_format($total, 2, ',', ' ') }} €</td>
+                </tr>
+            </tfoot>
+        </table>
+        <label>ALBARAN Nº {{ $albaran->alb_numero }}</label>
 
     </main>
 

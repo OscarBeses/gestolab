@@ -36,7 +36,7 @@ class AlbaranesController extends Controller
      */
     public function mostrarAlbaranes()
     {
-        $albaranes = Albaran::orderBy('alb_id', 'desc')->paginate(3);
+        $albaranes = Albaran::orderBy('alb_id', 'desc')->paginate(6);
         return view('albaranes.albaranes', compact('albaranes'));
     }
 
