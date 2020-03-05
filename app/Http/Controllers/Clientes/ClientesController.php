@@ -68,7 +68,7 @@ class ClientesController extends Controller
     public function editarCliente(Request $request, Cliente $cliente)
     {
         $request->validate([
-            'cli_nif' => 'required', 
+            'cli_nif' => 'required|max:9', 
             'cli_nombre' => 'required', 
             'cli_nombre_corto' => 'required', 
             'cli_cod_pos' => 'required',
