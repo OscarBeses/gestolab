@@ -26,9 +26,18 @@
                     <p class="mb-1">{{ $cliente->cli_municipio }}</p>
                 @endisset
                 <small>{{ 'C.P. ' . $cliente->cli_cod_pos . ' - ' . $cliente->cli_ciudad}}</small>
-                <a href="{{ route('cliente', [$cliente->cli_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
-                    <i class="far fa-edit"></i>
-                </a>
+                <form action="{{ route('cliente.eliminar', $cliente->cli_id) }}" method="POST">
+                    @csrf
+                    <div class="btn-group float-right">
+                        <a href="{{ route('cliente', [$cliente->cli_id]) }}" class="btn btn-primary btn-sm float-right boton-editar">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <button type="submit" class="btn btn-danger btn-sm" 
+                            onclick="return confirm('¿Seguro que deseas borrar al cliente '+$cliente->cli_nombre_corto+'?')">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </form>
             </li>
         @empty
             <li class="list-group-item text-center">No hay clientes registrados</li>

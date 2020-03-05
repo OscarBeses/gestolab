@@ -61,6 +61,7 @@ Route::get('/clientes/nuevo', 'Clientes\ClientesController@mostrarClienteNuevo')
 Route::put('/clientes/nuevo', 'Clientes\ClientesController@guardarCliente')->name('cliente.guardar');// Guarda el nuevo cliente
 Route::get('/clientes/{cliente}', 'Clientes\ClientesController@mostrarCliente')->name('cliente');// Muestra el detalle de un cliente
 Route::post('/clientes/{cliente}/editar', 'Clientes\ClientesController@editarCliente')->name('cliente.editar');// Edita el cliente
+Route::post('/clientes/{cliente}/eliminar', 'Clientes\ClientesController@eliminarCliente')->name('cliente.eliminar');
 
 // Ruta para productos y productos/prd_id
 Route::get('/productos', 'Productos\ProductosController@mostrarProductos')->name('productos');// Muestra los productos

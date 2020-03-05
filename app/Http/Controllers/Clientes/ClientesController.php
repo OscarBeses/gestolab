@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Clientes;
 
+use App\Albaran;
 use App\Cliente;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class ClientesController extends Controller
     public function guardarCliente(Request $request)
     {
         $request->validate([
-            'cli_nif' => 'required', 
+            'cli_nif' => 'required|max:9', 
             'cli_nombre' => 'required', 
             'cli_nombre_corto' => 'required', 
             'cli_cod_pos' => 'required',
@@ -82,4 +83,24 @@ class ClientesController extends Controller
         Session::flash('confirmacion','Se ha editado correctamente');
         return redirect('/clientes');
     }
+
+    /**
+     * Se mira si tiene alguna factura 
+     * - Si esta en alguna, no lo deberíamos poder borrar
+     * - Sino se borra (BORRANDO ANTES LOS TRABAJOS ASOCIADOS)
+     */
+    public function eliminarCliente(Cliente $cliente){
+        $albaranesDondeAparece = Albaran::where('cli_id', $cliente->cli_id)->get();
+        $nombreCliente = $cliente->cli_nombre_corto;
+
+        if(sizeof($albaranesDondeAparece) == 0) {
+            $cliente->delete();
+            Session::flash('confirmacion','El cliente '.$nombreCliente.' ha sido eliminado correctamente');
+            return redirect('/clientes');
+        } else {
+            Session::flash('error','No se puede eliminar un cliente si tiene albaranes');
+            return $this->mostrarClientes();
+        }
+    }
+
 }
