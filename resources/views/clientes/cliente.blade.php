@@ -11,8 +11,8 @@
     @include('componentes/mensajesErrores')
 
     <!-- 
-        Uso un formulario PUT hacia la ruta de guardar si hay un cliente
-        Y uso uno de tipo POST hacia la ruta de editar si no hay cliente
+        Uso un formulario PUT hacia la ruta de guardar si el cliente es nuevo
+        Y uso uno de tipo POST hacia la ruta de editar si el cliente ya existe en BD
     -->
     @isset($cliente->cli_id)
     <form class="form-group" action="{{ route('cliente.editar', $cliente->cli_id) }}" method="POST">

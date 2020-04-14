@@ -8,21 +8,21 @@ class Helper {
      * Pasando el objeto y el atributo, 
      * devuelve, si tiene, el anterior valor, y sino, el de base de datos
      */
-    public static function getDatoAnterior($obj, $atb) {
+    public static function getDatoAnterior($obj, $atrib) {
         
-        $objOld = old($atb);
-        $atb = Helper::corrigeAtributo($atb);
-        if(isset($obj))
-            $objBd = $obj->$atb;
+        $atribOld = old($atrib);
+        $atrib = Helper::corrigeAtributo($atrib);
+        if (isset($obj))
+            $atribBd = $obj->$atrib;
 
         $respuesta = "";
-        if (!empty($objOld)){
-            $respuesta = $objOld;
-        }elseif (isset($obj) && isset($objBd)){
-            $respuesta = $objBd;
+        if (!empty($atribOld)) {
+            $respuesta = $atribOld;
+        } elseif (isset($obj) && isset($atribBd)){
+            $respuesta = $atribBd;
         }
         
-        if($respuesta instanceof Carbon) {
+        if ($respuesta instanceof Carbon) {
             // Este formato es el que acepta el input date
             $respuesta = $respuesta->format('Y-m-d');
         }
